@@ -124,6 +124,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -221,9 +231,39 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -327,87 +367,18 @@
 
       
         
-          
-            <h1 id="api解析"><a href="#api解析" class="headerlink" title="api解析"></a>api解析</h1><p>官网地址</p>
-<p><a href="https://pdfobject.com/#api" target="_blank" rel="external">https://pdfobject.com/#api</a></p>
+          <h1 id="api解析"><a href="#api解析" class="headerlink" title="api解析"></a>api解析</h1><p>官网地址</p>
+<p><a href="https://pdfobject.com/#api">https://pdfobject.com/#api</a></p>
 <ol>
 <li><p><strong><em>PDFObject.supportsPDFs（pdfobject的支持类型）</em></strong></p>
 <p>PDFObject不会去执行特殊的第三方pdf阅读器（Adobe Reader, FoxIt, PDF.js, etc.），假设你想使用PDF.js，下面会有具体的使用方式</p>
 </li>
-<li><p><strong><em>PDFObject.pdfobjectversion（PDFObject的版本检测）</em></strong></p>
-</li>
 </ol>
-<blockquote>
-<p>   返回PDFObject的当前版本</p>
-<p>   示例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(PDFObject.pdfobjectversion);</div></pre></td></tr></table></figure>
-<p>3.<strong><em>PDFObject.embed(url [string], target [mixed], options [object])（PDFObject初始化函数）</em></strong></p>
-<blockquote>
-<p>大多数情况下会返回一个embed嵌入元素，在整合pdf.js的情况下会返回一个iframe对象，或者当其无法嵌入的时候，返回一个错误,</p>
-<p>PDFObject的核心在于这个初始化方法提供了大量的灵活性和功能性，下面的示例将展示：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//embeds a PDF and makes it fill the browser window</div><div class="line">PDFObject.embed();</div><div class="line"></div><div class="line">//embeds a PDF into the element </div><div class="line">PDFObject.embed(, );</div><div class="line"></div><div class="line">//embeds a PDF into the element </div><div class="line">var options = &#123;</div><div class="line">    height: ,</div><div class="line">    pdfOpenParams: &#123; view: &apos;FitV&apos;, page: &apos;2&apos; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">PDFObject.embed(, , options);</div></pre></td></tr></table></figure>
-<p>4.<strong><em>Specifying a target HTML node（指定一个目标html节点）</em></strong></p>
-<blockquote>
-<p>   这个目标参数可以是html节点，css选择器，或者jquery对象</p>
-<p>示例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//passes a CSS selector to specify the target</div><div class="line">PDFObject.embed(, );</div><div class="line"></div><div class="line">//passes a vanilla HTML node for target</div><div class="line">var mynode = document.getElementById();</div><div class="line">PDFObject.embed(, mynode);</div><div class="line"></div><div class="line">//passes a jQuery object (HTML node) for target</div><div class="line">var $node = $();</div><div class="line">PDFObject.embed(, $node);</div></pre></td></tr></table></figure>
-<p>5.<strong><em>Options（参数选项）</em></strong></p>
-<blockquote>
-<p>选项提供了大量的灵活性</p>
-</blockquote>
-<ul>
-<li>page(初始化的时候跳转到第几页)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123;page: &quot;2&quot;&#125;);</div></pre></td></tr></table></figure>
-<ul>
-<li>id(给嵌入元素一个id值)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123;id: &quot;myID&quot;&#125;);</div><div class="line">//outputs &lt;embed src=&quot;myfile.pdf&quot; id=&quot;myID&quot;&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>width(嵌入元素的宽度)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123;width: &quot;500px&quot;&#125;);</div><div class="line">//outputs &lt;embed src=&quot;myfile.pdf&quot; style=&quot;width:500px;&quot;&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>height(嵌入元素的高度)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123;height: &quot;20rem&quot;&#125;);</div><div class="line">//outputs &lt;embed src=&quot;myfile.pdf&quot; style=&quot;height:20rem;&quot;&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>fallbackLink(回调链接，在浏览器不支持的情况下，给与一段提示文字和文件下载链接)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var options = &#123;</div><div class="line">   fallbackLink: &quot;&lt;p&gt;This is a &lt;a href=&apos;[url]&apos;&gt;fallback link&lt;/a&gt;&lt;/p&gt;&quot;</div><div class="line">&#125;;</div><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, options);</div><div class="line">//If browser doesn&apos;t support inline PDFs, outputs:</div><div class="line">//&lt;p&gt;This is a &lt;a href=&apos;myfile.pdf&apos;&gt;fallback link&lt;/a&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>pdfOpenParams(允许使用adobe开放参数)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123;pdfOpenParams: &#123; page: 10 &#125;&#125;);</div><div class="line">//If supported, will cause the PDF viewer to load</div><div class="line">//the PDF and automatically scroll to page 10</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PDFObject.embed(&quot;myfile.pdf&quot;, &quot;#my-container&quot;, &#123; page: 10 &#125;);</div><div class="line">//If supported, will cause the PDF viewer to load</div><div class="line">//the PDF and automatically scroll to page 10</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Adobe’s PDF的更多开放参数</p>
-</blockquote>
-<p><a href="http://www.adobe.com/content/dam/Adobe/en/devnet/acrobat/pdfs/pdf_open_parameters.pdf" target="_blank" rel="external">Learn more about Adobe’s PDF Open Parameters</a></p>
-<blockquote>
-<p>PDF.js的更多开放参数</p>
-</blockquote>
-<p><a href="https://github.com/mozilla/pdf.js/wiki/Viewer-options" target="_blank" rel="external">Learn more about PDF.js’s implementation of PDF Open Parameters</a></p>
-<ul>
-<li>PDFJS_URL(pdf.js的展示页面链接)</li>
-</ul>
-<ul>
-<li>forcePDFJS(是否允许整合pdf.js，true为允许)</li>
-</ul>
-<p>综合案例</p>
-<ol>
-<li>基本案例</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var options = &#123;</div><div class="line">		pdfOpenParams: &#123;</div><div class="line">			pagemode: &quot;thumbs&quot;,</div><div class="line">			navpanes: 0,</div><div class="line">			toolbar: 0,</div><div class="line">			statusbar: 0,</div><div class="line">			view: &quot;FitV&quot;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">var myPDF = PDFObject.embed(&quot;ss.pdf&quot;, &quot;#header&quot;, options);</div></pre></td></tr></table></figure>
-<ol>
-<li>PDF.js整合案例</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var options = &#123;</div><div class="line">	pdfOpenParams: &#123;</div><div class="line">		navpanes: 0,</div><div class="line">		toolbar: 0,</div><div class="line">		statusbar: 0,</div><div class="line">		view: &quot;FitV&quot;,</div><div class="line">		pagemode: &quot;thumbs&quot;,</div><div class="line">		page: 2</div><div class="line">	&#125;,</div><div class="line">	forcePDFJS: true,</div><div class="line">	PDFJS_URL: &quot;http://mozilla.github.io/pdf.js/web/viewer.html&quot;</div><div class="line">	&#125;;</div><div class="line">var myPDF = PDFObject.embed(&quot;compressed.tracemonkey-pldi-09.pdf&quot;, &quot;#header&quot;, options);</div></pre></td></tr></table></figure>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/26/Untitled/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -624,27 +595,12 @@
 
       
         
-          
-            <h4 id="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"><a href="#关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。" class="headerlink" title="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"></a>关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。</h4><h5 id="早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。"><a href="#早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。" class="headerlink" title="早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。"></a>早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。</h5><ol>
-<li><p>requirejs和seajs二者在加载上都有缺陷，就是模块的依赖要等到模块加载完成后，通过静态分析（seajs）或者deps参数（requirejs）来获取，这就为 合并请求 和 按需加载 带来了实现上的矛盾：</p>
-<ul>
-<li>要么放弃按需加载，把所有js合成一个文件，从而满足请求合并（两个框架的官方demo都有这样的例子）；</li>
-<li>要么放弃请求合并，请求独立的模块文件，从而满足按需加载。</li>
-</ul>
-</li>
-<li><p>AMD规范在执行callback的时候，要初始化所有依赖的模块，而CMD只有执行到require的时候才初始化模块。所以用AMD实现某种if-else逻辑分支加载不同的模块的时候，就会比较麻烦了。考虑这种情况：</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//AMD for SPA</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'page/index'</span>, <span class="string">'page/detail'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">index, detail</span>)</span>&#123;</div><div class="line">    <span class="comment">//在执行回调之前，index和detail模块的factory均执行过了</span></div><div class="line">    <span class="keyword">switch</span>(location.hash)&#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">'#index'</span>:</div><div class="line">            index();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">'#detail'</span>:</div><div class="line">            detail();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>在执行回调之前，已经同时执行了index和detail模块的factory，而CMD只有执行到require才会调用对应模块的factory。这种差别带来的不仅仅是性能上的差异，也可能为开发增加一点小麻烦，比如不方便实现换肤功能，factory注意不要直接操作dom等。当然，我们可以多层嵌套require来解决这个问题，但又会引起模块请求串行的问题。</p>
-<h6 id="结论：以纯前端方式实现模块化框架-不能-同时满足-按需加载，请求合并-和-依赖管理-三个需求。导致这个问题的根本原因是-纯前端方式只能在运行时分析依赖关系-因此，对于网站来说，一般根据类型来选择合适的解决方案。"><a href="#结论：以纯前端方式实现模块化框架-不能-同时满足-按需加载，请求合并-和-依赖管理-三个需求。导致这个问题的根本原因是-纯前端方式只能在运行时分析依赖关系-因此，对于网站来说，一般根据类型来选择合适的解决方案。" class="headerlink" title="结论：以纯前端方式实现模块化框架 不能 同时满足 按需加载，请求合并 和 依赖管理 三个需求。导致这个问题的根本原因是 纯前端方式只能在运行时分析依赖关系,因此，对于网站来说，一般根据类型来选择合适的解决方案。"></a>结论：以纯前端方式实现模块化框架 不能 同时满足 按需加载，请求合并 和 依赖管理 三个需求。导致这个问题的根本原因是 纯前端方式只能在运行时分析依赖关系,因此，对于网站来说，一般根据类型来选择合适的解决方案。</h6><ol>
-<li>小型网站，不适用模块化方案，整体文件使用allinone方式。</li>
-<li>中型网站，使用amd或者cmd规范进行开发，可以解决多人合作下的命名冲突问题。但是无法解决allinone问题。</li>
-<li>大型网站，可以使用静态资源分析方式，通过和后台的配合对文件进行allinone，按需加载，做到网站性能的最大化，但是由于复杂度较高，所以一般只适用于大型网站。</li>
-</ol>
-<p>在最新版本的js中，已经引入了前端模块化的解决方式，commonjs规范，由于目前浏览器端并不支持commonjs规范，所以可用性为零，但是在不久之后，当浏览器能够很好地支持es6之后，我们将无需因为模块化而设计如此多的解决方式。</p>
-
-          
+          <h4 id="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"><a href="#关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。" class="headerlink" title="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"></a>关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/01/按需加载和文件合并的选择/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -761,24 +717,12 @@
 
       
         
-          
-            <h4 id="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"><a href="#为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。" class="headerlink" title="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"></a>为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。</h4><h5 id="假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。"><a href="#假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。" class="headerlink" title="假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。"></a>假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。</h5><ol>
-<li>一种是网站区域的整体懒加载（也就是说，一开始只加载人眼所能看到的区域内容，在滚动条下滑的过程中进行内容载入）。</li>
-<li>第二种是使用图片懒加载技术，一开始只显示人眼所能识别区域的图片文件，根据滚动条的下拉来进行图片的载入，接下来我们具体讲解第二种实现方式。因为对于网站来说，文字的加载渲染并不需要太多的时间，影响网站性能最主要的因素还是图片。</li>
-</ol>
-<h6 id="具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性"><a href="#具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性" class="headerlink" title="具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性"></a>具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性</h6><p>下面使用示例对其说明。<br>首先，在页面中准备一个id为div1的div,在这个div中放一个ul,ul中准备了一些li,然而这些li都有一个data-src的属性，准备着图片的地址，具体结构如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140710/1-140G0161612.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33R6.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33242.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://img.bizhi.sogou.com/images/2014/12/10/997251.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://dl.bizhi.sogou.com/images/2014/12/02/986640.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170473_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170475_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170477_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>图片的动态加载就是通过读取li元素，然后获得li元素的data-src属性的值赋予动态创建的图片的src，从而实现了图片的创建。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setImg</span>(<span class="params">index</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> oDiv=<span class="built_in">document</span>.getElementById(<span class="string">"div1"</span>)</div><div class="line">                <span class="keyword">var</span> oUl=oDiv.children[<span class="number">0</span>];</div><div class="line">                <span class="keyword">var</span> aLi=oUl.children;</div><div class="line">                <span class="keyword">if</span> (aLi[index].dataset) &#123;</div><div class="line">                    <span class="keyword">var</span> src=aLi[index].dataset.src;</div><div class="line">                &#125; <span class="keyword">else</span>&#123;</div><div class="line">                    <span class="keyword">var</span> src=aLi[index].getAttribute(<span class="string">'data-src'</span>);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">var</span> oImg=<span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">                oImg.src=src;</div><div class="line">                <span class="keyword">if</span> (aLi[index].children.length==<span class="number">0</span>) &#123;</div><div class="line">                    aLi[index].appendChild(oImg); </div><div class="line">                &#125;</div><div class="line">            &#125;</div></pre></td></tr></table></figure>
-<p>那么怎么识别是否在可视区域呢？这里需要一个函数，能够实现获得当前元素距离网页顶部的距离！</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获得对象距离页面顶端的距离  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getH</span>(<span class="params">obj</span>) </span>&#123;  </div><div class="line">    <span class="keyword">var</span> h = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (obj) &#123;  </div><div class="line">        h += obj.offsetTop;  </div><div class="line">        obj = obj.offsetParent;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> h;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当网页的滚动条滚动时要时时判断当前li的位置！</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> oDiv = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</div><div class="line">    <span class="keyword">var</span> oUl = oDiv.children[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> aLi = oUl.children;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = aLi.length; i &lt; l; i++) &#123;</div><div class="line">        <span class="keyword">var</span> oLi = aLi[i];</div><div class="line">        <span class="comment">//检查oLi是否在可视区域</span></div><div class="line">        <span class="keyword">var</span> t = <span class="built_in">document</span>.documentElement.clientHeight + (<span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop);</div><div class="line">        <span class="keyword">var</span> h = getH(oLi);</div><div class="line">        <span class="keyword">if</span> (h &lt; t) &#123;</div><div class="line">            setTimeout(<span class="string">"setImg("</span> + i + <span class="string">")"</span>, <span class="number">500</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p> 当页面加载完成以后要主动运行一下window.onscroll，从而获得当前可视范围内的图片<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="built_in">window</span>.onscroll();</div><div class="line">     &#125;;</div></pre></td></tr></table></figure></p>
-<p>   另外，像这样的页面，障眼法和美化都是必须的，比如给每个li一个loading的图片作为背景，从而实现了当前图片正在加载的效果，美化工作就是做好合理的布局。</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"> * &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#div1 &#123;</div><div class="line">    width: 520px;</div><div class="line">    margin: 30px auto;</div><div class="line">    border: 1px solid red;</div><div class="line">    overflow: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line">li &#123;</div><div class="line">    width: 160px;</div><div class="line">    height: 160px;</div><div class="line">    float: left;</div><div class="line">    list-style: none;</div><div class="line">    margin: 5px;</div><div class="line">    background: url(loading.gif) center center no-repeat;</div><div class="line">    border: 1px dashed green;</div><div class="line">&#125;</div><div class="line">img&#123;</div><div class="line">width:100%</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=33984087&auto=0&height=66"></iframe>
-          
+          <h4 id="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"><a href="#为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。" class="headerlink" title="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"></a>为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/31/网站图片懒加载技术的实现方式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -876,8 +820,7 @@
 
       
         
-          
-            <h1 id="算法效率的度量方法"><a href="#算法效率的度量方法" class="headerlink" title="算法效率的度量方法"></a>算法效率的度量方法</h1><ol>
+          <h1 id="算法效率的度量方法"><a href="#算法效率的度量方法" class="headerlink" title="算法效率的度量方法"></a>算法效率的度量方法</h1><ol>
 <li>事后统计方法，利用计时来进行计算（拥有很大的缺陷，必须依赖测试程序，花费太多时间，不同计算机处理速度不同）。</li>
 <li>事前分析估算方法。受以下因素影响。<ol>
 <li>算法采用的策率</li>
@@ -887,19 +830,11 @@
 </ol>
 </li>
 </ol>
-<h4 id="算法更需要关注主项的最高次方数"><a href="#算法更需要关注主项的最高次方数" class="headerlink" title="算法更需要关注主项的最高次方数"></a>算法更需要关注主项的最高次方数</h4><p>计算算法复杂度的攻略</p>
-<p>计算算法复杂度的定义</p>
-<blockquote>
-<p>一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n),使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。记作T(n)=O(f(n)),称O(f(n)) 为算法的渐进时间复杂度，简称时间复杂度。<br>分析：随着模块n的增大，算法执行的时间的增长率和 f(n) 的增长率成正比，所以 f(n) 越小，算法的时间复杂度越低，算法的效率越高。</p>
-</blockquote>
-<h4 id="如何分析算法的复杂度"><a href="#如何分析算法的复杂度" class="headerlink" title="如何分析算法的复杂度"></a>如何分析算法的复杂度</h4><ol>
-<li>用常数1取代运行时间中的所有加法常数</li>
-<li>在修改后的运行次数函数中，只保留最高项</li>
-<li>最高项存在阶项且不为1，取消与其相乘的常熟</li>
-</ol>
-<h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><p>多层循环的算法往往更加复杂</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/28/算法的复杂度和空间复杂度/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1016,38 +951,12 @@
 
       
         
-          
-            <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h4 id="程序设计-数据结构-算法。"><a href="#程序设计-数据结构-算法。" class="headerlink" title="程序设计=数据结构+算法。"></a>程序设计=数据结构+算法。</h4><h5 id="数据结构就是关系，是数据元素相互之间存在的一种联系。"><a href="#数据结构就是关系，是数据元素相互之间存在的一种联系。" class="headerlink" title="数据结构就是关系，是数据元素相互之间存在的一种联系。"></a>数据结构就是关系，是数据元素相互之间存在的一种联系。</h5><ul>
-<li>集合结构：数据元素同属于一个集合，无其他联系。</li>
-<li>线性结构：元素属于一对一的结构。</li>
-<li>树形结构：元素存在一对多的形式。</li>
-<li>图形结构：多对多的数据结构。</li>
-<li>存储结构，分顺序存储结构和链式存储结构，顺序存储结构例如数组，链式存储结构，只需要关注前一个数据是否存储，元素可以是不连续的存储。以指针链接。</li>
-</ul>
-<h5 id="算法的特性"><a href="#算法的特性" class="headerlink" title="算法的特性"></a>算法的特性</h5><ol>
-<li>输入：算法具有零个或者多个输入</li>
-<li>输出：算法至少有一个或者多个输出</li>
-<li>有穷性，算法在执行有限步骤后会自动结束。</li>
-<li>确定性：算法的每一个步骤都有明确的含义，相同的输入只会有唯一的的输出结果（有异议）。</li>
-<li>可行性：算法的每一步在当前的环境下都是可行的</li>
-</ol>
-<h5 id="算法设计的要求"><a href="#算法设计的要求" class="headerlink" title="算法设计的要求"></a>算法设计的要求</h5><ol>
-<li>正确性：大体分为4个层次<ul>
-<li>算法程序没有语法错误。</li>
-<li>算法程序对于合法输入能够有满足要求的输出。</li>
-<li>算法对于非法输入能够有满足规格的说明（给予提示）。</li>
-<li>算法程序对于故意刁难的测试输入有满足要求的输出结果。</li>
-</ul>
-</li>
-<li>可读性<ul>
-<li>可读性，足够的注释和说明。</li>
-<li>健壮性，当输入不合法的数据时，算法应该给予相关处理，而不是产生异常，奔溃，或者莫名其妙的结果。</li>
-<li>时间效率高和存储量低。</li>
-</ul>
-</li>
-</ol>
-
-          
+          <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h4 id="程序设计-数据结构-算法。"><a href="#程序设计-数据结构-算法。" class="headerlink" title="程序设计=数据结构+算法。"></a>程序设计=数据结构+算法。</h4><h5 id="数据结构就是关系，是数据元素相互之间存在的一种联系。"><a href="#数据结构就是关系，是数据元素相互之间存在的一种联系。" class="headerlink" title="数据结构就是关系，是数据元素相互之间存在的一种联系。"></a>数据结构就是关系，是数据元素相互之间存在的一种联系。</h5>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/26/数据结构和算法导论/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
