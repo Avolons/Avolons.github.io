@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="seo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站图片懒加载技术的实现方式">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2016/07/31/网站图片懒加载技术的实现方式/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗">
+<meta property="og:updated_time" content="2016-08-06T05:47:02.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站图片懒加载技术的实现方式">
+<meta name="twitter:description" content="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2016/07/31/网站图片懒加载技术的实现方式/"/>
+
+  <title> 网站图片懒加载技术的实现方式 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                网站图片懒加载技术的实现方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-31T23:05:00+08:00" content="2016-07-31">
+              2016-07-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/懒加载/" itemprop="url" rel="index">
+                    <span itemprop="name">懒加载</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/31/网站图片懒加载技术的实现方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/31/网站图片懒加载技术的实现方式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"><a href="#为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。" class="headerlink" title="为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"></a>为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。</h4><h5 id="假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。"><a href="#假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。" class="headerlink" title="假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。"></a>假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。</h5><ol>
+<li>一种是网站区域的整体懒加载（也就是说，一开始只加载人眼所能看到的区域内容，在滚动条下滑的过程中进行内容载入）。</li>
+<li>第二种是使用图片懒加载技术，一开始只显示人眼所能识别区域的图片文件，根据滚动条的下拉来进行图片的载入，接下来我们具体讲解第二种实现方式。因为对于网站来说，文字的加载渲染并不需要太多的时间，影响网站性能最主要的因素还是图片。</li>
+</ol>
+<h6 id="具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性"><a href="#具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性" class="headerlink" title="具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性"></a>具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性</h6><p>下面使用示例对其说明。<br>首先，在页面中准备一个id为div1的div,在这个div中放一个ul,ul中准备了一些li,然而这些li都有一个data-src的属性，准备着图片的地址，具体结构如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140710/1-140G0161612.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33R6.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33242.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://img.bizhi.sogou.com/images/2014/12/10/997251.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://dl.bizhi.sogou.com/images/2014/12/02/986640.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170473_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170475_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170477_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">data-src</span>=<span class="string">"http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>图片的动态加载就是通过读取li元素，然后获得li元素的data-src属性的值赋予动态创建的图片的src，从而实现了图片的创建。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setImg</span>(<span class="params">index</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> oDiv=<span class="built_in">document</span>.getElementById(<span class="string">"div1"</span>)</div><div class="line">                <span class="keyword">var</span> oUl=oDiv.children[<span class="number">0</span>];</div><div class="line">                <span class="keyword">var</span> aLi=oUl.children;</div><div class="line">                <span class="keyword">if</span> (aLi[index].dataset) &#123;</div><div class="line">                    <span class="keyword">var</span> src=aLi[index].dataset.src;</div><div class="line">                &#125; <span class="keyword">else</span>&#123;</div><div class="line">                    <span class="keyword">var</span> src=aLi[index].getAttribute(<span class="string">'data-src'</span>);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">var</span> oImg=<span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">                oImg.src=src;</div><div class="line">                <span class="keyword">if</span> (aLi[index].children.length==<span class="number">0</span>) &#123;</div><div class="line">                    aLi[index].appendChild(oImg); </div><div class="line">                &#125;</div><div class="line">            &#125;</div></pre></td></tr></table></figure>
+<p>那么怎么识别是否在可视区域呢？这里需要一个函数，能够实现获得当前元素距离网页顶部的距离！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获得对象距离页面顶端的距离  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getH</span>(<span class="params">obj</span>) </span>&#123;  </div><div class="line">    <span class="keyword">var</span> h = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (obj) &#123;  </div><div class="line">        h += obj.offsetTop;  </div><div class="line">        obj = obj.offsetParent;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> h;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当网页的滚动条滚动时要时时判断当前li的位置！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> oDiv = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</div><div class="line">    <span class="keyword">var</span> oUl = oDiv.children[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> aLi = oUl.children;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = aLi.length; i &lt; l; i++) &#123;</div><div class="line">        <span class="keyword">var</span> oLi = aLi[i];</div><div class="line">        <span class="comment">//检查oLi是否在可视区域</span></div><div class="line">        <span class="keyword">var</span> t = <span class="built_in">document</span>.documentElement.clientHeight + (<span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop);</div><div class="line">        <span class="keyword">var</span> h = getH(oLi);</div><div class="line">        <span class="keyword">if</span> (h &lt; t) &#123;</div><div class="line">            setTimeout(<span class="string">"setImg("</span> + i + <span class="string">")"</span>, <span class="number">500</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p> 当页面加载完成以后要主动运行一下window.onscroll，从而获得当前可视范围内的图片<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="built_in">window</span>.onscroll();</div><div class="line">     &#125;;</div></pre></td></tr></table></figure></p>
+<p>   另外，像这样的页面，障眼法和美化都是必须的，比如给每个li一个loading的图片作为背景，从而实现了当前图片正在加载的效果，美化工作就是做好合理的布局。</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"> * &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#div1 &#123;</div><div class="line">    width: 520px;</div><div class="line">    margin: 30px auto;</div><div class="line">    border: 1px solid red;</div><div class="line">    overflow: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line">li &#123;</div><div class="line">    width: 160px;</div><div class="line">    height: 160px;</div><div class="line">    float: left;</div><div class="line">    list-style: none;</div><div class="line">    margin: 5px;</div><div class="line">    background: url(loading.gif) center center no-repeat;</div><div class="line">    border: 1px dashed green;</div><div class="line">&#125;</div><div class="line">img&#123;</div><div class="line">width:100%</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=33984087&auto=0&height=66"></iframe>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/seo/" rel="tag">#seo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/算法的复杂度和空间复杂度/" rel="next" title="算法的复杂度和空间复杂度">
+                <i class="fa fa-chevron-left"></i> 算法的复杂度和空间复杂度
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/01/按需加载和文件合并的选择/" rel="prev" title="按需加载和文件合并的选择">
+                按需加载和文件合并的选择 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/31/网站图片懒加载技术的实现方式/"
+           data-title="网站图片懒加载技术的实现方式" data-url="http://www.wanzhuhao.cn/2016/07/31/网站图片懒加载技术的实现方式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhuhao Wan" />
+          <p class="site-author-name" itemprop="name">zhuhao Wan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。"><span class="nav-number">1.</span> <span class="nav-text">为了提高网站的加载速度，我们有一系列的方式来进行实现，其实我们知道影响加载速度的无非就是请求的数量和文件的大小，而请求数量的解决方式，之前我们通常会使用allinone的文件合并法和雪碧图的图标合并法来大量减少文件和图片的请求数量，这可能在很多类型的网站中都非常的实用，但还有一个非常重要的因素，就是显示区域问题。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。"><span class="nav-number">1.1.</span> <span class="nav-text">假设一个非常庞大的电商网站，他的内容非常的多，我们如果一次性加载完成，那其实是非常消耗时间的，而且由于图片的加载属于异步加载，在网站图片过多的时候，会造成整个网站加载过程中的卡顿，对于这个问题，一般会使用两种方式进行解决。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性"><span class="nav-number">1.1.1.</span> <span class="nav-text">具体实现图片懒加载技术并不复杂，其主要原理就是将图片的真是url地址放置在图片的自定属性之中，在需要其显示的时候将其url属性取出并复制给src，使得其去加载相应的图片，当然为了美观也可以在外层元素中加入背景图片属性</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuhao Wan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

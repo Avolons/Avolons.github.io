@@ -1,0 +1,654 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="seo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。早期为了实现前端模块化制定了amd和cmd两种规范，并由此">
+<meta property="og:type" content="article">
+<meta property="og:title" content="按需加载和文件合并的选择">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2016/08/01/按需加载和文件合并的选择/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。早期为了实现前端模块化制定了amd和cmd两种规范，并由此">
+<meta property="og:updated_time" content="2016-07-31T18:26:12.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="按需加载和文件合并的选择">
+<meta name="twitter:description" content="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。早期为了实现前端模块化制定了amd和cmd两种规范，并由此">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2016/08/01/按需加载和文件合并的选择/"/>
+
+  <title> 按需加载和文件合并的选择 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                按需加载和文件合并的选择
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-01T02:08:00+08:00" content="2016-08-01">
+              2016-08-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/模块化/" itemprop="url" rel="index">
+                    <span itemprop="name">模块化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/01/按需加载和文件合并的选择/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/按需加载和文件合并的选择/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"><a href="#关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。" class="headerlink" title="关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"></a>关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。</h4><h5 id="早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。"><a href="#早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。" class="headerlink" title="早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。"></a>早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。</h5><ol>
+<li><p>requirejs和seajs二者在加载上都有缺陷，就是模块的依赖要等到模块加载完成后，通过静态分析（seajs）或者deps参数（requirejs）来获取，这就为 合并请求 和 按需加载 带来了实现上的矛盾：</p>
+<ul>
+<li>要么放弃按需加载，把所有js合成一个文件，从而满足请求合并（两个框架的官方demo都有这样的例子）；</li>
+<li>要么放弃请求合并，请求独立的模块文件，从而满足按需加载。</li>
+</ul>
+</li>
+<li><p>AMD规范在执行callback的时候，要初始化所有依赖的模块，而CMD只有执行到require的时候才初始化模块。所以用AMD实现某种if-else逻辑分支加载不同的模块的时候，就会比较麻烦了。考虑这种情况：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//AMD for SPA</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'page/index'</span>, <span class="string">'page/detail'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">index, detail</span>)</span>&#123;</div><div class="line">    <span class="comment">//在执行回调之前，index和detail模块的factory均执行过了</span></div><div class="line">    <span class="keyword">switch</span>(location.hash)&#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">'#index'</span>:</div><div class="line">            index();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">'#detail'</span>:</div><div class="line">            detail();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在执行回调之前，已经同时执行了index和detail模块的factory，而CMD只有执行到require才会调用对应模块的factory。这种差别带来的不仅仅是性能上的差异，也可能为开发增加一点小麻烦，比如不方便实现换肤功能，factory注意不要直接操作dom等。当然，我们可以多层嵌套require来解决这个问题，但又会引起模块请求串行的问题。</p>
+<h6 id="结论：以纯前端方式实现模块化框架-不能-同时满足-按需加载，请求合并-和-依赖管理-三个需求。导致这个问题的根本原因是-纯前端方式只能在运行时分析依赖关系-因此，对于网站来说，一般根据类型来选择合适的解决方案。"><a href="#结论：以纯前端方式实现模块化框架-不能-同时满足-按需加载，请求合并-和-依赖管理-三个需求。导致这个问题的根本原因是-纯前端方式只能在运行时分析依赖关系-因此，对于网站来说，一般根据类型来选择合适的解决方案。" class="headerlink" title="结论：以纯前端方式实现模块化框架 不能 同时满足 按需加载，请求合并 和 依赖管理 三个需求。导致这个问题的根本原因是 纯前端方式只能在运行时分析依赖关系,因此，对于网站来说，一般根据类型来选择合适的解决方案。"></a>结论：以纯前端方式实现模块化框架 不能 同时满足 按需加载，请求合并 和 依赖管理 三个需求。导致这个问题的根本原因是 纯前端方式只能在运行时分析依赖关系,因此，对于网站来说，一般根据类型来选择合适的解决方案。</h6><ol>
+<li>小型网站，不适用模块化方案，整体文件使用allinone方式。</li>
+<li>中型网站，使用amd或者cmd规范进行开发，可以解决多人合作下的命名冲突问题。但是无法解决allinone问题。</li>
+<li>大型网站，可以使用静态资源分析方式，通过和后台的配合对文件进行allinone，按需加载，做到网站性能的最大化，但是由于复杂度较高，所以一般只适用于大型网站。</li>
+</ol>
+<p>在最新版本的js中，已经引入了前端模块化的解决方式，commonjs规范，由于目前浏览器端并不支持commonjs规范，所以可用性为零，但是在不久之后，当浏览器能够很好地支持es6之后，我们将无需因为模块化而设计如此多的解决方式。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/seo/" rel="tag">#seo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/31/网站图片懒加载技术的实现方式/" rel="next" title="网站图片懒加载技术的实现方式">
+                <i class="fa fa-chevron-left"></i> 网站图片懒加载技术的实现方式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/04/算法基础：排序算法/" rel="prev" title="算法基础：排序算法">
+                算法基础：排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/01/按需加载和文件合并的选择/"
+           data-title="按需加载和文件合并的选择" data-url="http://www.wanzhuhao.cn/2016/08/01/按需加载和文件合并的选择/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhuhao Wan" />
+          <p class="site-author-name" itemprop="name">zhuhao Wan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。"><span class="nav-number">1.</span> <span class="nav-text">关于前端模块化，一直是前端工程师所讨论的热点，在初期为了解决网站请求文件数量过多的问题，经常使用文件合并的方式，也就是通常所说的allinone，但这只是解决了网站的性能问题，而往往在大型的项目中，比如说多人合作的大型网站，经常会出现重复命名的方法，为此，我们可能会使用命名空间的方法，但这并不是解决问题的最好手段，模块化才是最终的解决方案。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。"><span class="nav-number">1.1.</span> <span class="nav-text">早期为了实现前端模块化制定了amd和cmd两种规范，并由此诞生了requirejs和seajs两种工具，但这两种工具都有自身的缺陷。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#结论：以纯前端方式实现模块化框架-不能-同时满足-按需加载，请求合并-和-依赖管理-三个需求。导致这个问题的根本原因是-纯前端方式只能在运行时分析依赖关系-因此，对于网站来说，一般根据类型来选择合适的解决方案。"><span class="nav-number">1.1.1.</span> <span class="nav-text">结论：以纯前端方式实现模块化框架 不能 同时满足 按需加载，请求合并 和 依赖管理 三个需求。导致这个问题的根本原因是 纯前端方式只能在运行时分析依赖关系,因此，对于网站来说，一般根据类型来选择合适的解决方案。</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuhao Wan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
