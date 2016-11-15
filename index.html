@@ -298,6 +298,126 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/27/最详细的原生ajax写法/" itemprop="url">
+                  最详细的原生ajax写法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T00:15:00+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/最详细的原生ajax写法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/最详细的原生ajax写法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#比较全面的原生ajax</p>
+<h3 id="作为经典面试题，原生ajax几乎成为前端面试必备，此处分享一个比较全面的原生ajax"><a href="#作为经典面试题，原生ajax几乎成为前端面试必备，此处分享一个比较全面的原生ajax" class="headerlink" title="作为经典面试题，原生ajax几乎成为前端面试必备，此处分享一个比较全面的原生ajax"></a>作为经典面试题，原生ajax几乎成为前端面试必备，此处分享一个比较全面的原生ajax</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">creatXHR</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//进行浏览器检测，选择使用何种http对象</span></div><div class="line">		<span class="keyword">if</span>(<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) &#123;</div><div class="line">		<span class="comment">//XMLHttpRequest对象得到了所有现代浏览器较好的支持</span></div><div class="line">			creatXHR = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>) &#123;</div><div class="line">		<span class="comment">//在ie6已经ie6以下版本的浏览器中，必须使用typeof ActiveXObject对象</span></div><div class="line">			<span class="keyword">if</span>(<span class="keyword">typeof</span>(<span class="built_in">arguments</span>.callee.activeString) != <span class="string">"undefined"</span>) &#123;</div><div class="line">			<span class="comment">//此处使用惰性函数，检测当前function对象是否存在activeString属性，存在则说明xhr对象已经建立；</span></div><div class="line">				<span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>, <span class="string">"MSXML2.XMLHttp"</span>];</div><div class="line">				<span class="comment">//进行ie的版本检测</span></div><div class="line">				<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i, versions.length; i++) &#123;</div><div class="line">					<span class="keyword">try</span> &#123;</div><div class="line">						<span class="keyword">new</span> ActiveXObject(versions[i]);</div><div class="line">						<span class="built_in">arguments</span>.callee.activeString == versions[i];</div><div class="line">					&#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">						<span class="comment">//tiaoguo</span></div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeString);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"buzhichiajax"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//创建xhr对象</span></div><div class="line">	<span class="keyword">var</span> xhr = creatXHR();</div><div class="line">	xhr.onreadystatechange= <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//readyState共有五个状态，0 未连接 1 打开连接2 发送请求3 交互4 完成交互，接手响应</span></div><div class="line">		<span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">		<span class="comment">//关于http状态，可自行百度</span></div><div class="line">			<span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status == <span class="number">304</span>) &#123;</div><div class="line">				alert(xhr.responseText)</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				alert(<span class="string">"falied"</span>)</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> url = <span class="string">"php/index.php?rand"</span> + <span class="built_in">Math</span>.random();</div><div class="line">	xhr.open(<span class="string">"GET"</span>, <span class="string">"php/index.php"</span>, <span class="literal">false</span>);</div><div class="line">	xhr.send(<span class="literal">null</span>);</div><div class="line">	<span class="comment">//对url进行编码</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">addUrl</span>(<span class="params">url, name, value</span>) </span>&#123;</div><div class="line">		url += url.indexOf(<span class="string">"?"</span>) == <span class="number">-1</span> ? <span class="string">"?"</span> : <span class="string">"&amp;"</span>;</div><div class="line">		url += <span class="built_in">encodeURIComponent</span>(name) + <span class="string">"="</span> + <span class="built_in">encodeURIComponent</span>(value);</div><div class="line">		<span class="keyword">return</span> url;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//post请求</span></div><div class="line">	xhr.open(<span class="string">"POST"</span>, <span class="string">"php/index.php"</span>, <span class="literal">true</span>);</div><div class="line">	xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">	<span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(<span class="string">"form"</span>)</div><div class="line">	<span class="comment">//表单序列化函数,自行百度</span></div><div class="line">	xhr.send(serialize(form));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/26/Untitled/" itemprop="url">
                   PDFobject.js官方api简易说明
                 </a>
@@ -1133,7 +1253,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
