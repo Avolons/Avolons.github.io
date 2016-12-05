@@ -298,6 +298,207 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/05/更加炫酷的canvas背景/" itemprop="url">
+                  更加炫酷的canvas背景
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-05T22:25:00+08:00" content="2016-12-05">
+              2016-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/05/更加炫酷的canvas背景/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/更加炫酷的canvas背景/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="看到了-http-luuman-github-io-Home-H1-index-html-该博客的canvas背景，这个博客很有意思，屏蔽了鼠标右击，然后又给f12添加了按下关闭当前页面的事件，可惜怎么可能阻止我这颗探索的心。上次分享过一个canvas特效，这次的效果类似，更炫酷一点，讲解一下大概思路，首先设置一个数组，用于放置所有的点，对所有的点进行随机绘制，筛选鼠标所在位置设定值半径内的所有点，遍历这些点，将其与其他在设定距离之类的相邻点进行线连接，使用定时器，重复执行该过程，就会出现这样的效果。下次就不玩这个canvas了，分享点实用的东西，canvas虽然炫，但我工作中能用的机会毕竟太少。"><a href="#看到了-http-luuman-github-io-Home-H1-index-html-该博客的canvas背景，这个博客很有意思，屏蔽了鼠标右击，然后又给f12添加了按下关闭当前页面的事件，可惜怎么可能阻止我这颗探索的心。上次分享过一个canvas特效，这次的效果类似，更炫酷一点，讲解一下大概思路，首先设置一个数组，用于放置所有的点，对所有的点进行随机绘制，筛选鼠标所在位置设定值半径内的所有点，遍历这些点，将其与其他在设定距离之类的相邻点进行线连接，使用定时器，重复执行该过程，就会出现这样的效果。下次就不玩这个canvas了，分享点实用的东西，canvas虽然炫，但我工作中能用的机会毕竟太少。" class="headerlink" title="看到了 http://luuman.github.io/Home/H1/index.html  该博客的canvas背景，这个博客很有意思，屏蔽了鼠标右击，然后又给f12添加了按下关闭当前页面的事件，可惜怎么可能阻止我这颗探索的心。上次分享过一个canvas特效，这次的效果类似，更炫酷一点，讲解一下大概思路，首先设置一个数组，用于放置所有的点，对所有的点进行随机绘制，筛选鼠标所在位置设定值半径内的所有点，遍历这些点，将其与其他在设定距离之类的相邻点进行线连接，使用定时器，重复执行该过程，就会出现这样的效果。下次就不玩这个canvas了，分享点实用的东西，canvas虽然炫，但我工作中能用的机会毕竟太少。"></a>看到了 <a href="http://luuman.github.io/Home/H1/index.html" target="_blank" rel="external">http://luuman.github.io/Home/H1/index.html</a>  该博客的canvas背景，这个博客很有意思，屏蔽了鼠标右击，然后又给f12添加了按下关闭当前页面的事件，可惜怎么可能阻止我这颗探索的心。上次分享过一个canvas特效，这次的效果类似，更炫酷一点，讲解一下大概思路，首先设置一个数组，用于放置所有的点，对所有的点进行随机绘制，筛选鼠标所在位置设定值半径内的所有点，遍历这些点，将其与其他在设定距离之类的相邻点进行线连接，使用定时器，重复执行该过程，就会出现这样的效果。下次就不玩这个canvas了，分享点实用的东西，canvas虽然炫，但我工作中能用的机会毕竟太少。</h3><h4 id="在线demodemo"><a href="#在线demodemo" class="headerlink" title="在线demodemo"></a>在线demo<a href="http://www.qdfuns.com/notes/25440/d05c3fe7aa7d9c1bb13913174c448ad7.html" title="demo" target="_blank" rel="external">demo</a></h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span><span class="undefined"></span></div><div class="line">      *&#123;</div><div class="line">        margin: 0;</div><div class="line">        padding: 0</div><div class="line">      &#125;</div><div class="line">      html,body&#123;</div><div class="line">        height: 100%;</div><div class="line">        margin: 0;</div><div class="line">        padding: 0;</div><div class="line">        background-color: #000000;</div><div class="line">        overflow: hidden;</div><div class="line">      &#125;</div><div class="line">      #canvas&#123;</div><div class="line">        height: 100%;</div><div class="line">        width: 100%;</div><div class="line">        overflow: hidden;</div><div class="line">      &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> &gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">     $(function()&#123;</div><div class="line">       var canvas = document.querySelector('canvas'),</div><div class="line">           ctx = canvas.getContext('2d');</div><div class="line">       canvas.width = window.innerWidth;</div><div class="line">       canvas.height = window.innerHeight;</div><div class="line">       //显得宽度为0.3</div><div class="line">       ctx.lineWidth = 0.3;</div><div class="line">       //生成随机的颜色</div><div class="line">       ctx.strokeStyle = (new Color(150)).style;</div><div class="line"></div><div class="line">       var mousePosition = &#123;</div><div class="line">         //初始化鼠标位置点，不明白为啥不直接写/2</div><div class="line">         x: 50 * canvas.width / 100,</div><div class="line">         y: 50 * canvas.height / 100</div><div class="line">       &#125;;</div><div class="line"></div><div class="line">       var dots = &#123;</div><div class="line">         //点的个数</div><div class="line">         nb: 250,</div><div class="line">         //两点间最大距离的平方除以2再开方，就是就是一个筛选值</div><div class="line">         distance: 100,</div><div class="line">         //鼠标有效半径</div><div class="line">         d_radius: 150,</div><div class="line">         //小球数组</div><div class="line">         array: []</div><div class="line">       &#125;;</div><div class="line"></div><div class="line">     //rgb的色值介于0-255之间</div><div class="line">       function colorValue(min) &#123;</div><div class="line">         return Math.floor(Math.random() * 255 + min);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       function createColorStyle(r,g,b) &#123;</div><div class="line">         return 'rgba(' + r + ',' + g + ',' + b + ', 0.9)';</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       //此处高能开始，一开始以为只是去两个颜色的中间值，没想到连直径的比例也加上去了</div><div class="line">       function mixComponents(comp1, weight1, comp2, weight2) &#123;</div><div class="line">         return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //用于返回连线的颜色</div><div class="line">       function averageColorStyles(dot1, dot2) &#123;</div><div class="line">         //获取两点的颜色</div><div class="line">         var color1 = dot1.color,</div><div class="line">             color2 = dot2.color;</div><div class="line"></div><div class="line">         var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),</div><div class="line">             g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),</div><div class="line">             b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);</div><div class="line">         return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //随机颜色生成器，这个写的挺神的</div><div class="line">       function Color(min) &#123;</div><div class="line">         min = min || 0;</div><div class="line">         this.r = colorValue(min);</div><div class="line">         this.g = colorValue(min);</div><div class="line">         this.b = colorValue(min);</div><div class="line">         this.style = createColorStyle(this.r, this.g, this.b);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //生成一个点</div><div class="line">       function Dot()&#123;</div><div class="line">         //点产生在页面的随机位置处</div><div class="line">         this.x = Math.random() * canvas.width;</div><div class="line">         this.y = Math.random() * canvas.height;</div><div class="line">           //设定x和y轴的运动速度</div><div class="line">         this.vx = -.5 + Math.random();</div><div class="line">         this.vy = -.5 + Math.random();</div><div class="line">         //直径大小，也是随机的</div><div class="line">         this.radius = Math.random() * 2;</div><div class="line">         //随机的颜色</div><div class="line">         this.color = new Color();</div><div class="line">         // console.log(this);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //原型上加绘制函数</div><div class="line">       Dot.prototype = &#123;</div><div class="line">         //绘制小点的方法</div><div class="line">         draw: function()&#123;</div><div class="line">           ctx.beginPath();</div><div class="line">           ctx.fillStyle = this.color.style;</div><div class="line">           ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);</div><div class="line">           ctx.fill();</div><div class="line">         &#125;</div><div class="line">       &#125;;</div><div class="line"></div><div class="line">     //创建了一个点的集合</div><div class="line">       function createDots()&#123;</div><div class="line">         for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">           dots.array.push(new Dot());</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //碰撞检测函数</div><div class="line">       function moveDots() &#123;</div><div class="line">         for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line"></div><div class="line">           var dot = dots.array[i];</div><div class="line"></div><div class="line">           if(dot.y &lt; 0 || dot.y &gt; canvas.height)&#123;</div><div class="line">             dot.vx = dot.vx;</div><div class="line">             dot.vy = - dot.vy;</div><div class="line">           &#125;</div><div class="line">           else if(dot.x &lt; 0 || dot.x &gt; canvas.width)&#123;</div><div class="line">             dot.vx = - dot.vx;</div><div class="line">             dot.vy = dot.vy;</div><div class="line">           &#125;</div><div class="line">           dot.x += dot.vx;</div><div class="line">           dot.y += dot.vy;</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     // 遍历点的数组，将满足的条件的两个点进行连线</div><div class="line">       function connectDots() &#123;</div><div class="line">         for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">           for(j = 0; j &lt; dots.nb; j++)&#123;</div><div class="line">             i_dot = dots.array[i];</div><div class="line">             j_dot = dots.array[j];</div><div class="line">             //假设当前点距离和遍历的点的距离小于所定义的半径长度（其实为distance的平方乘以二再开方，三角函数），这两个判断到时大家可以重新研究一下谁在上谁在下，以做到算法最优化</div><div class="line">             if((i_dot.x - j_dot.x) &lt; dots.distance &amp;&amp; (i_dot.y - j_dot.y) &lt; dots.distance &amp;&amp; (i_dot.x - j_dot.x) &gt; - dots.distance &amp;&amp; (i_dot.y - j_dot.y) &gt; - dots.distance)&#123;</div><div class="line">               //用来筛选处于鼠标所在点设定值半径内的所欲点</div><div class="line">               if((i_dot.x - mousePosition.x) &lt; dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &lt; dots.d_radius &amp;&amp; (i_dot.x - mousePosition.x) &gt; - dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &gt; - dots.d_radius)&#123;</div><div class="line">                 ctx.beginPath();</div><div class="line">                 //之前最好奇的就是线的渐变是怎么做的，看完顿时感觉，很高能</div><div class="line">                 ctx.strokeStyle = averageColorStyles(i_dot, j_dot);</div><div class="line">                 ctx.moveTo(i_dot.x, i_dot.y);</div><div class="line">                 ctx.lineTo(j_dot.x, j_dot.y);</div><div class="line">                 ctx.stroke();</div><div class="line">                 ctx.closePath();</div><div class="line">               &#125;</div><div class="line">             &#125;</div><div class="line">           &#125;</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //数组中的所有小球，进行绘制</div><div class="line">       function drawDots() &#123;</div><div class="line">         for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">           var dot = dots.array[i];</div><div class="line">           dot.draw();</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     //比定时器更加准确，跟着浏览器的渲染频率走</div><div class="line">       function animateDots() &#123;</div><div class="line">         //清空画布,并且重新绘制，然后执行定时器，循环绘制</div><div class="line">         ctx.clearRect(0, 0, canvas.width, canvas.height);</div><div class="line"></div><div class="line">         moveDots();</div><div class="line"></div><div class="line">         connectDots();</div><div class="line"></div><div class="line">         drawDots();</div><div class="line"></div><div class="line">         requestAnimationFrame(animateDots);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">     // 监听鼠标移动</div><div class="line">       $('canvas').on('mousemove', function(e)&#123;</div><div class="line">         mousePosition.x = e.pageX;</div><div class="line">         mousePosition.y = e.pageY;</div><div class="line">       &#125;);</div><div class="line"></div><div class="line">     //鼠标移除，再次将默认位置重置为中心区域</div><div class="line">       $('canvas').on('mouseleave', function(e)&#123;</div><div class="line">         mousePosition.x = canvas.width / 2;</div><div class="line">         mousePosition.y = canvas.height / 2;</div><div class="line">       &#125;);</div><div class="line"></div><div class="line">       // 创建点集合</div><div class="line">       createDots();</div><div class="line">       //其实用定时器是一样的，准确率差不了多少，估计作者想使用新技术，又或是本身是一个强迫症患者</div><div class="line">       requestAnimationFrame(animateDots);</div><div class="line">     &#125;);</div><div class="line"></div><div class="line">     <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/05/一个常见的canvas背景/" itemprop="url">
+                  一个常见的canvas背景
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-05T22:24:00+08:00" content="2016-12-05">
+              2016-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/05/一个常见的canvas背景/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/一个常见的canvas背景/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习"><a href="#这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习" class="headerlink" title="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习"></a>这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习</h2><h5 id="在线demo地址-demo"><a href="#在线demo地址-demo" class="headerlink" title="在线demo地址 demo"></a>在线demo地址 <a href="http://www.qdfuns.com/notes/25440/7ca2e62e1703b2313a0e3f9595191773.html" title="demo" target="_blank" rel="external">demo</a></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">html, body &#123;</div><div class="line">  background: #333;</div><div class="line">&#125;</div><div class="line">canvas&#123;</div><div class="line">  position: absolute;</div><div class="line">  width: 100%; height: 100%;</div><div class="line">  top: 0; right: 0; bottom: 0; left: 0;</div><div class="line">&#125;</div><div class="line">		<span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">canvas</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">		var canvasDots = function() &#123;</div><div class="line">			var canvas = document.querySelector('canvas'),</div><div class="line">					ctx = canvas.getContext('2d'),</div><div class="line">					colorDot = '#00bdbf',</div><div class="line">					color = '#00bdbf';</div><div class="line">			canvas.width = window.innerWidth;</div><div class="line">			canvas.height = window.innerHeight;</div><div class="line">			canvas.style.display = 'block';</div><div class="line">			ctx.fillStyle = colorDot;</div><div class="line">			//线的宽度</div><div class="line">			ctx.lineWidth = .1;</div><div class="line">			//线的颜色，后期可以使用随机颜色，更炫</div><div class="line">			ctx.strokeStyle = color;</div><div class="line">			//自定义初始化的鼠标位置（自己可以随便写）</div><div class="line">			var mousePosition = &#123;</div><div class="line">				x: 30 * canvas.width / 100,</div><div class="line">				y: 30 * canvas.height / 100</div><div class="line">			&#125;;</div><div class="line">			//自己加一个定时器</div><div class="line">			var times=null;</div><div class="line">			var dots = &#123;</div><div class="line">				//总数量</div><div class="line">				nb: 500,</div><div class="line">				//两点之间可以连接的最长距离</div><div class="line">				distance: 100,</div><div class="line">				//所在点的链接有效半径</div><div class="line">				d_radius: 100,</div><div class="line">				//点对象数组</div><div class="line">				array: []</div><div class="line">			&#125;;</div><div class="line">			function Dot()&#123;</div><div class="line">				//随机位置点，利用随机数0-1乘以整个画面的长宽，使其均匀分布在整个画面</div><div class="line">				this.x = Math.random() * canvas.width;</div><div class="line">				this.y = Math.random() * canvas.height;</div><div class="line">				//x轴速度</div><div class="line">				this.vx = -.5 + Math.random();</div><div class="line">				//y轴速度</div><div class="line">				this.vy = -.5 + Math.random();</div><div class="line">				this.radius = Math.random();</div><div class="line">			&#125;</div><div class="line">			//继承的方法，创建一个点</div><div class="line">			Dot.prototype = &#123;</div><div class="line">				//点创建函数</div><div class="line">				create: function()&#123;</div><div class="line">					ctx.beginPath();</div><div class="line">					ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);</div><div class="line">					ctx.fill();</div><div class="line">				&#125;,</div><div class="line">				//小球的生成和碰撞检测</div><div class="line">				animate: function()&#123;</div><div class="line">					for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">						//往数组里添加点</div><div class="line">						var dot = dots.array[i];</div><div class="line">						//碰撞检测。碰到边缘后速度防线置反</div><div class="line">						//y轴的检测</div><div class="line">						if(dot.y &lt; 0 || dot.y &gt; canvas.height)&#123;</div><div class="line">							dot.vx = dot.vx;</div><div class="line">							dot.vy = - dot.vy;</div><div class="line">						&#125;</div><div class="line">						//x轴的检测</div><div class="line">						else if(dot.x &lt; 0 || dot.x &gt; canvas.width)&#123;</div><div class="line">							dot.vx = - dot.vx;</div><div class="line">							dot.vy = dot.vy;</div><div class="line">						&#125;</div><div class="line">						//运动轨迹</div><div class="line">						dot.x += dot.vx;</div><div class="line">						dot.y += dot.vy;</div><div class="line">					&#125;</div><div class="line">				&#125;,</div><div class="line">				line: function()&#123;</div><div class="line">		//  	var s=new Date();</div><div class="line">					//二维数组遍历，计算次数为点总数的次方，用于计算当前点和周围所有点的距离是否处于设置的距离之类，如果是，则将其相连接</div><div class="line">					for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">						for(j = 0; j &lt; dots.nb; j++)&#123;</div><div class="line">							//目标点</div><div class="line">							i_dot = dots.array[i];</div><div class="line">							//遍历整个页面所有的点</div><div class="line">							j_dot = dots.array[j];</div><div class="line">					//假设当前点距离和遍历的点的距离小于所定义的半径长度（其实为distance的平方乘以二再开方，三角函数），这两个判断到时可以重新研究一下谁在上谁在下，以做到算法最优化</div><div class="line">					//经过计算，先筛选出距离鼠标对象的有效点，才筛选出距离周围有效距离的点，这样的判断循序，所消耗的时间更短，所以，更换了源代码两个判断的位置</div><div class="line">								if((i_dot.x - mousePosition.x) &lt; dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &lt; dots.d_radius &amp;&amp; (i_dot.x - mousePosition.x) &gt; - dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &gt; - dots.d_radius)&#123;</div><div class="line">									if((i_dot.x - j_dot.x) &lt; dots.distance &amp;&amp; (i_dot.y - j_dot.y) &lt; dots.distance &amp;&amp; (i_dot.x - j_dot.x) &gt; - dots.distance &amp;&amp; (i_dot.y - j_dot.y) &gt; - dots.distance)&#123;</div><div class="line">								//开始绘制这条线</div><div class="line">									ctx.beginPath();</div><div class="line">									ctx.moveTo(i_dot.x, i_dot.y);</div><div class="line">									ctx.lineTo(j_dot.x, j_dot.y);</div><div class="line">									ctx.stroke();</div><div class="line">									ctx.closePath();</div><div class="line">								&#125;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">		//    var m=new Date();</div><div class="line">		//    console.log(m.getTime()-s.getTime());</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			//页面刷新重绘函数</div><div class="line">			function createDots()&#123;</div><div class="line">				//刷新整个区域</div><div class="line">				ctx.clearRect(0, 0, canvas.width, canvas.height);</div><div class="line">				//重绘所有小点</div><div class="line">				for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">					dots.array.push(new Dot());</div><div class="line">					//遍历所有的点</div><div class="line">					dot = dots.array[i];</div><div class="line">					dot.create();</div><div class="line">				&#125;</div><div class="line">				//创造线</div><div class="line">				dot.line();</div><div class="line">				//点运动函数</div><div class="line">				dot.animate();</div><div class="line">			&#125;</div><div class="line">			//鼠标移动函数，每次移动将中心点变量的位置设置成当前鼠标的位置</div><div class="line">			window.onmousemove = function(parameter) &#123;</div><div class="line">				mousePosition.x = parameter.pageX;</div><div class="line">				mousePosition.y = parameter.pageY;</div><div class="line">			&#125;</div><div class="line">			//使得鼠标位置处于页面正中间，无效，可以直接注释掉</div><div class="line">			mousePosition.x = window.innerWidth / 2;</div><div class="line">			mousePosition.y = window.innerHeight / 2;</div><div class="line">		//此处有问题，定时器会不断的增加，导致内存消耗越来越多，应当在每次执行当前函数是清空定时器</div><div class="line">			clearInterval(times);</div><div class="line">			//每隔50毫秒刷新一次页面</div><div class="line">			times=setInterval(createDots, 30);</div><div class="line">		&#125;;</div><div class="line">		window.onload = function() &#123;</div><div class="line">			//预先执行一次函数</div><div class="line">			canvasDots();</div><div class="line">		&#125;;</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/16/gulp常见配置/" itemprop="url">
                   gulp常见配置
                 </a>
@@ -1291,7 +1492,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1308,7 +1509,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

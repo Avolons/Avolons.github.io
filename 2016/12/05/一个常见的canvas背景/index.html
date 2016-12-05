@@ -1,0 +1,677 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习在线demo地址 demo12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个常见的canvas背景">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2016/12/05/一个常见的canvas背景/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习在线demo地址 demo12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777">
+<meta property="og:updated_time" content="2016-12-05T14:25:17.647Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个常见的canvas背景">
+<meta name="twitter:description" content="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习在线demo地址 demo12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2016/12/05/一个常见的canvas背景/"/>
+
+  <title> 一个常见的canvas背景 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个常见的canvas背景
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-05T22:24:00+08:00" content="2016-12-05">
+              2016-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/05/一个常见的canvas背景/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/一个常见的canvas背景/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习"><a href="#这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习" class="headerlink" title="这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习"></a>这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习</h2><h5 id="在线demo地址-demo"><a href="#在线demo地址-demo" class="headerlink" title="在线demo地址 demo"></a>在线demo地址 <a href="http://www.qdfuns.com/notes/25440/7ca2e62e1703b2313a0e3f9595191773.html" title="demo" target="_blank" rel="external">demo</a></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">html, body &#123;</div><div class="line">  background: #333;</div><div class="line">&#125;</div><div class="line">canvas&#123;</div><div class="line">  position: absolute;</div><div class="line">  width: 100%; height: 100%;</div><div class="line">  top: 0; right: 0; bottom: 0; left: 0;</div><div class="line">&#125;</div><div class="line">		<span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">canvas</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">		var canvasDots = function() &#123;</div><div class="line">			var canvas = document.querySelector('canvas'),</div><div class="line">					ctx = canvas.getContext('2d'),</div><div class="line">					colorDot = '#00bdbf',</div><div class="line">					color = '#00bdbf';</div><div class="line">			canvas.width = window.innerWidth;</div><div class="line">			canvas.height = window.innerHeight;</div><div class="line">			canvas.style.display = 'block';</div><div class="line">			ctx.fillStyle = colorDot;</div><div class="line">			//线的宽度</div><div class="line">			ctx.lineWidth = .1;</div><div class="line">			//线的颜色，后期可以使用随机颜色，更炫</div><div class="line">			ctx.strokeStyle = color;</div><div class="line">			//自定义初始化的鼠标位置（自己可以随便写）</div><div class="line">			var mousePosition = &#123;</div><div class="line">				x: 30 * canvas.width / 100,</div><div class="line">				y: 30 * canvas.height / 100</div><div class="line">			&#125;;</div><div class="line">			//自己加一个定时器</div><div class="line">			var times=null;</div><div class="line">			var dots = &#123;</div><div class="line">				//总数量</div><div class="line">				nb: 500,</div><div class="line">				//两点之间可以连接的最长距离</div><div class="line">				distance: 100,</div><div class="line">				//所在点的链接有效半径</div><div class="line">				d_radius: 100,</div><div class="line">				//点对象数组</div><div class="line">				array: []</div><div class="line">			&#125;;</div><div class="line">			function Dot()&#123;</div><div class="line">				//随机位置点，利用随机数0-1乘以整个画面的长宽，使其均匀分布在整个画面</div><div class="line">				this.x = Math.random() * canvas.width;</div><div class="line">				this.y = Math.random() * canvas.height;</div><div class="line">				//x轴速度</div><div class="line">				this.vx = -.5 + Math.random();</div><div class="line">				//y轴速度</div><div class="line">				this.vy = -.5 + Math.random();</div><div class="line">				this.radius = Math.random();</div><div class="line">			&#125;</div><div class="line">			//继承的方法，创建一个点</div><div class="line">			Dot.prototype = &#123;</div><div class="line">				//点创建函数</div><div class="line">				create: function()&#123;</div><div class="line">					ctx.beginPath();</div><div class="line">					ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);</div><div class="line">					ctx.fill();</div><div class="line">				&#125;,</div><div class="line">				//小球的生成和碰撞检测</div><div class="line">				animate: function()&#123;</div><div class="line">					for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">						//往数组里添加点</div><div class="line">						var dot = dots.array[i];</div><div class="line">						//碰撞检测。碰到边缘后速度防线置反</div><div class="line">						//y轴的检测</div><div class="line">						if(dot.y &lt; 0 || dot.y &gt; canvas.height)&#123;</div><div class="line">							dot.vx = dot.vx;</div><div class="line">							dot.vy = - dot.vy;</div><div class="line">						&#125;</div><div class="line">						//x轴的检测</div><div class="line">						else if(dot.x &lt; 0 || dot.x &gt; canvas.width)&#123;</div><div class="line">							dot.vx = - dot.vx;</div><div class="line">							dot.vy = dot.vy;</div><div class="line">						&#125;</div><div class="line">						//运动轨迹</div><div class="line">						dot.x += dot.vx;</div><div class="line">						dot.y += dot.vy;</div><div class="line">					&#125;</div><div class="line">				&#125;,</div><div class="line">				line: function()&#123;</div><div class="line">		//  	var s=new Date();</div><div class="line">					//二维数组遍历，计算次数为点总数的次方，用于计算当前点和周围所有点的距离是否处于设置的距离之类，如果是，则将其相连接</div><div class="line">					for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">						for(j = 0; j &lt; dots.nb; j++)&#123;</div><div class="line">							//目标点</div><div class="line">							i_dot = dots.array[i];</div><div class="line">							//遍历整个页面所有的点</div><div class="line">							j_dot = dots.array[j];</div><div class="line">					//假设当前点距离和遍历的点的距离小于所定义的半径长度（其实为distance的平方乘以二再开方，三角函数），这两个判断到时可以重新研究一下谁在上谁在下，以做到算法最优化</div><div class="line">					//经过计算，先筛选出距离鼠标对象的有效点，才筛选出距离周围有效距离的点，这样的判断循序，所消耗的时间更短，所以，更换了源代码两个判断的位置</div><div class="line">								if((i_dot.x - mousePosition.x) &lt; dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &lt; dots.d_radius &amp;&amp; (i_dot.x - mousePosition.x) &gt; - dots.d_radius &amp;&amp; (i_dot.y - mousePosition.y) &gt; - dots.d_radius)&#123;</div><div class="line">									if((i_dot.x - j_dot.x) &lt; dots.distance &amp;&amp; (i_dot.y - j_dot.y) &lt; dots.distance &amp;&amp; (i_dot.x - j_dot.x) &gt; - dots.distance &amp;&amp; (i_dot.y - j_dot.y) &gt; - dots.distance)&#123;</div><div class="line">								//开始绘制这条线</div><div class="line">									ctx.beginPath();</div><div class="line">									ctx.moveTo(i_dot.x, i_dot.y);</div><div class="line">									ctx.lineTo(j_dot.x, j_dot.y);</div><div class="line">									ctx.stroke();</div><div class="line">									ctx.closePath();</div><div class="line">								&#125;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">		//    var m=new Date();</div><div class="line">		//    console.log(m.getTime()-s.getTime());</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			//页面刷新重绘函数</div><div class="line">			function createDots()&#123;</div><div class="line">				//刷新整个区域</div><div class="line">				ctx.clearRect(0, 0, canvas.width, canvas.height);</div><div class="line">				//重绘所有小点</div><div class="line">				for(i = 0; i &lt; dots.nb; i++)&#123;</div><div class="line">					dots.array.push(new Dot());</div><div class="line">					//遍历所有的点</div><div class="line">					dot = dots.array[i];</div><div class="line">					dot.create();</div><div class="line">				&#125;</div><div class="line">				//创造线</div><div class="line">				dot.line();</div><div class="line">				//点运动函数</div><div class="line">				dot.animate();</div><div class="line">			&#125;</div><div class="line">			//鼠标移动函数，每次移动将中心点变量的位置设置成当前鼠标的位置</div><div class="line">			window.onmousemove = function(parameter) &#123;</div><div class="line">				mousePosition.x = parameter.pageX;</div><div class="line">				mousePosition.y = parameter.pageY;</div><div class="line">			&#125;</div><div class="line">			//使得鼠标位置处于页面正中间，无效，可以直接注释掉</div><div class="line">			mousePosition.x = window.innerWidth / 2;</div><div class="line">			mousePosition.y = window.innerHeight / 2;</div><div class="line">		//此处有问题，定时器会不断的增加，导致内存消耗越来越多，应当在每次执行当前函数是清空定时器</div><div class="line">			clearInterval(times);</div><div class="line">			//每隔50毫秒刷新一次页面</div><div class="line">			times=setInterval(createDots, 30);</div><div class="line">		&#125;;</div><div class="line">		window.onload = function() &#123;</div><div class="line">			//预先执行一次函数</div><div class="line">			canvasDots();</div><div class="line">		&#125;;</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/16/gulp常见配置/" rel="next" title="gulp常见配置">
+                <i class="fa fa-chevron-left"></i> gulp常见配置
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/05/更加炫酷的canvas背景/" rel="prev" title="更加炫酷的canvas背景">
+                更加炫酷的canvas背景 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/05/一个常见的canvas背景/"
+     data-title="一个常见的canvas背景"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2016/12/05/一个常见的canvas背景/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/05/一个常见的canvas背景/"
+           data-title="一个常见的canvas背景" data-url="http://www.wanzhuhao.cn/2016/12/05/一个常见的canvas背景/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhuhao Wan" />
+          <p class="site-author-name" itemprop="name">zhuhao Wan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习"><span class="nav-number">1.</span> <span class="nav-text">这个canvas效果应该是被应用的最广泛的一个特效，我将其加上了注释，方便新手学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在线demo地址-demo"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">在线demo地址 demo</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuhao Wan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
