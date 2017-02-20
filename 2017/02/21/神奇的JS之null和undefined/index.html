@@ -1,0 +1,693 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神奇的JS之null和undefined">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/02/21/神奇的JS之null和undefined/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。">
+<meta property="og:updated_time" content="2017-02-20T16:14:33.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神奇的JS之null和undefined">
+<meta name="twitter:description" content="众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/02/21/神奇的JS之null和undefined/"/>
+
+  <title> 神奇的JS之null和undefined | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                神奇的JS之null和undefined
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-21T00:10:00+08:00" content="2017-02-21">
+              2017-02-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/21/神奇的JS之null和undefined/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/21/神奇的JS之null和undefined/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。"><a href="#众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。" class="headerlink" title="众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。"></a>众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。</h3><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">null==undefined</div><div class="line">//true</div></pre></td></tr></table></figure>
+<h5 id="但是如果我们使用严格运算符-结果便显示这两者实不相等的"><a href="#但是如果我们使用严格运算符-结果便显示这两者实不相等的" class="headerlink" title="但是如果我们使用严格运算符,结果便显示这两者实不相等的"></a>但是如果我们使用严格运算符,结果便显示这两者实不相等的</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">null===undefined</div><div class="line">//false</div></pre></td></tr></table></figure>
+<h5 id="我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下"><a href="#我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下" class="headerlink" title="我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下"></a>我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typeof(1)</div><div class="line">//&quot;number&quot;</div><div class="line">typeof(&quot;ss&quot;)</div><div class="line">//&quot;string&quot;</div><div class="line">typeof(undefined)</div><div class="line">//&quot;undefined&quot;</div><div class="line">typeof(null)</div><div class="line">//&quot;object&quot;</div><div class="line">typeof(false)</div><div class="line">//&quot;boolean&quot;</div></pre></td></tr></table></figure>
+<h5 id="这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言"><a href="#这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言" class="headerlink" title="这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言"></a>这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言</h5><h5 id="MDN列举了null和undefined的以下不同点"><a href="#MDN列举了null和undefined的以下不同点" class="headerlink" title="MDN列举了null和undefined的以下不同点"></a>MDN列举了null和undefined的以下不同点</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typeof null        // object (因为一些以前的原因而不是&apos;null&apos;)</div><div class="line">typeof undefined   // undefined</div><div class="line">null === undefined // false</div><div class="line">null  == undefined // true</div><div class="line">null === null // true</div><div class="line">null == null // true</div><div class="line">!null //true</div><div class="line">!undefined//true</div><div class="line">isNaN(1 + null) // false</div><div class="line">isNaN(1 + undefined) // true</div></pre></td></tr></table></figure>
+<h6 id="关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。"><a href="#关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。" class="headerlink" title="关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。"></a>关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。</h6><h4 id="目前，经过总结，两者最明显的区别在于。"><a href="#目前，经过总结，两者最明显的区别在于。" class="headerlink" title="目前，经过总结，两者最明显的区别在于。"></a>目前，经过总结，两者最明显的区别在于。</h4><h6 id="null表示”没有对象”，即该处不应该有值。典型用法是："><a href="#null表示”没有对象”，即该处不应该有值。典型用法是：" class="headerlink" title="null表示”没有对象”，即该处不应该有值。典型用法是："></a>null表示”没有对象”，即该处不应该有值。典型用法是：</h6><ol>
+<li>作为函数的参数，表示该函数的参数不是对象。</li>
+<li>作为对象原型链的终点。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object.getPrototypeOf(Object.prototype)</div><div class="line">//关于原型链的知识以后会着重研究</div></pre></td></tr></table></figure>
+<h6 id="undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是："><a href="#undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：" class="headerlink" title="undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是："></a>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</h6><ol>
+<li>变量被声明了，但没有赋值时，就等于undefined。</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined。</li>
+<li>对象没有赋值的属性，该属性的值为undefined。</li>
+<li>函数没有返回值时，默认返回undefined。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var i;</div><div class="line">i // undefined</div><div class="line"></div><div class="line">function f(x)&#123;console.log(x)&#125;</div><div class="line">f() // undefined</div><div class="line"></div><div class="line">var  o = new Object();</div><div class="line">o.p // undefined</div><div class="line"></div><div class="line">var x = f();</div><div class="line">x // undefined</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=26989255&auto=1&height=32"></iframe>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/17/ES6学习笔记一（let-和-const-命令）/" rel="next" title="ES6学习笔记一（let 和 const 命令）">
+                <i class="fa fa-chevron-left"></i> ES6学习笔记一（let 和 const 命令）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/21/一人我编程累/" rel="prev" title="一人我编程累">
+                一人我编程累 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/21/神奇的JS之null和undefined/"
+     data-title="神奇的JS之null和undefined"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/02/21/神奇的JS之null和undefined/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/21/神奇的JS之null和undefined/"
+           data-title="神奇的JS之null和undefined" data-url="http://www.wanzhuhao.cn/2017/02/21/神奇的JS之null和undefined/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhuhao Wan" />
+          <p class="site-author-name" itemprop="name">zhuhao Wan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。"><span class="nav-number">1.</span> <span class="nav-text">众所周知，js的基本数据类型共有5个（es6新增了Symbol），而null和undefined作为其中的两个基本数据类型，好多人一直不知道其区别在哪，因为他们的表现在大多数情况下都是一样。甚至如下所示，浏览器都认为其是相等的。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#但是如果我们使用严格运算符-结果便显示这两者实不相等的"><span class="nav-number">1.0.1.</span> <span class="nav-text">但是如果我们使用严格运算符,结果便显示这两者实不相等的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下"><span class="nav-number">1.0.2.</span> <span class="nav-text">我们可以使用typeof来测试这两者的类型，其实这里有个问题一直困扰着我，首先我使用typeof测试es5的5种基本数据类型，其得到结果分别如下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言"><span class="nav-number">1.0.3.</span> <span class="nav-text">这一下我就真的是懵逼了，为什么null的typeof显示结果是object，后来查找资料才知道这是历史遗留问题，曾经有提案希望将null的类型显示为null，但由于牵扯到的历史代码太多，所以被否决了。js的确是个神奇的语言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MDN列举了null和undefined的以下不同点"><span class="nav-number">1.0.4.</span> <span class="nav-text">MDN列举了null和undefined的以下不同点</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">关于最后两个，重点在于js的隐式类型转换，再次不过度探讨。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目前，经过总结，两者最明显的区别在于。"><span class="nav-number">1.1.</span> <span class="nav-text">目前，经过总结，两者最明显的区别在于。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#null表示”没有对象”，即该处不应该有值。典型用法是："><span class="nav-number">1.1.0.1.</span> <span class="nav-text">null表示”没有对象”，即该处不应该有值。典型用法是：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是："><span class="nav-number">1.1.0.2.</span> <span class="nav-text">undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuhao Wan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
