@@ -1,0 +1,689 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在开始探讨这个话题之前，我们先来欣赏几段代码12345671+ false //1&amp;quot;1&amp;quot; + 2;    // &amp;quot;12&amp;quot;1 + 2 + &amp;quot;3&amp;quot;;    // &amp;quot;33&amp;quot;3+null; //31 == &amp;#123; valueOf: function() &amp;#123;return 1;&amp;#125; &amp;#125;    //">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神奇的JS之隐式转换">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/02/22/神奇的JS之隐式转换/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="在开始探讨这个话题之前，我们先来欣赏几段代码12345671+ false //1&amp;quot;1&amp;quot; + 2;    // &amp;quot;12&amp;quot;1 + 2 + &amp;quot;3&amp;quot;;    // &amp;quot;33&amp;quot;3+null; //31 == &amp;#123; valueOf: function() &amp;#123;return 1;&amp;#125; &amp;#125;    //">
+<meta property="og:updated_time" content="2017-02-21T16:38:42.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神奇的JS之隐式转换">
+<meta name="twitter:description" content="在开始探讨这个话题之前，我们先来欣赏几段代码12345671+ false //1&amp;quot;1&amp;quot; + 2;    // &amp;quot;12&amp;quot;1 + 2 + &amp;quot;3&amp;quot;;    // &amp;quot;33&amp;quot;3+null; //31 == &amp;#123; valueOf: function() &amp;#123;return 1;&amp;#125; &amp;#125;    //">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/02/22/神奇的JS之隐式转换/"/>
+
+  <title> 神奇的JS之隐式转换 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                神奇的JS之隐式转换
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-22T00:38:00+08:00" content="2017-02-22">
+              2017-02-22
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/22/神奇的JS之隐式转换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/22/神奇的JS之隐式转换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="在开始探讨这个话题之前，我们先来欣赏几段代码"><a href="#在开始探讨这个话题之前，我们先来欣赏几段代码" class="headerlink" title="在开始探讨这个话题之前，我们先来欣赏几段代码"></a>在开始探讨这个话题之前，我们先来欣赏几段代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1+ false //1</div><div class="line">&quot;1&quot; + 2;    // &quot;12&quot;</div><div class="line">1 + 2 + &quot;3&quot;;    // &quot;33&quot;</div><div class="line">3+null; //3</div><div class="line">1 == &#123; valueOf: function() &#123;return 1;&#125; &#125;    // true</div><div class="line">1 + &#123; valueOf: function() &#123;return 1;&#125; &#125;    // 2</div><div class="line">&quot;1&quot; + &#123; toString: function() &#123;return 1;&#125; &#125;    // &quot;11&quot;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在-Javascript-中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如-调用非函数对象或者获取-null-undefined-的属性时。"><a href="#我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在-Javascript-中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如-调用非函数对象或者获取-null-undefined-的属性时。" class="headerlink" title="我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在 Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如: 调用非函数对象或者获取 null / undefined 的属性时。"></a>我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在 Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如: 调用非函数对象或者获取 null / undefined 的属性时。</h5><h5 id="首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下"><a href="#首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下" class="headerlink" title="首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下"></a>首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1+true //2</div><div class="line">&quot;1&quot; + 2;    // &quot;12&quot;</div><div class="line">1 == &#123; valueOf: function() &#123;return 1;&#125; &#125;    // true</div><div class="line">var obj = &#123;</div><div class="line">			toString: function() &#123;</div><div class="line">				return &quot;Object CustomObj&quot;;</div><div class="line">			&#125;,</div><div class="line">			valueOf: function() &#123;</div><div class="line">				return 1;</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">obj == true //true</div><div class="line">obj ==&quot;1&quot; //true</div></pre></td></tr></table></figure>
+<ul>
+<li>如果比较的两者中有布尔值(Boolean)，会把 Boolean 先转换为对应的 Number，即 0 和 1，然后进行比较。</li>
+<li>如果比较的双方中有一方为 Number ，一方为 String 时，会把 String 通过 Number() 方法转换为数字，然后进行比较。</li>
+<li>如果比较的双方中有一方为 Boolean ，一方为 String 时，则会将空字符串 “” 转换为 false ，除此外的一切字符串转换为 true ，然后进行比较。</li>
+<li>如果比较的双方中有一方为 Number ，一方为 Object 时，则会调用 valueOf 方法将 Object 转换为数字，然后进行比较。</li>
+<li>如果比较的双方中有一方为 Boolean ，一方为 Object 时，则会调用 valueOf 方法将 Object 转换为数字，将Boolean也转化为数字，然后进行比较。</li>
+<li>如果比较的双方中有一方为 String ，一方为 Object 时，则会调用 valueOf 方法将 Object 转换为数字，把 String 通过 Number() 方法转换为数字，然后进行比较。</li>
+</ul>
+<h5 id="那根据以上的总结"><a href="#那根据以上的总结" class="headerlink" title="那根据以上的总结"></a>那根据以上的总结</h5><h6 id="首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。"><a href="#首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。" class="headerlink" title="首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。"></a>首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。</h6><h6 id="需要强调的是，在-Javascript-中，只有-空字符串-、-数字0-、-false-、-null-、-undefined-和-NaN-这-6-个值为假之外，其他所有的值均为真值。"><a href="#需要强调的是，在-Javascript-中，只有-空字符串-、-数字0-、-false-、-null-、-undefined-和-NaN-这-6-个值为假之外，其他所有的值均为真值。" class="headerlink" title="需要强调的是，在 Javascript 中，只有 空字符串 、 数字0 、 false 、 null 、 undefined 和 NaN 这 6 个值为假之外，其他所有的值均为真值。"></a>需要强调的是，在 Javascript 中，只有 空字符串 、 数字0 、 false 、 null 、 undefined 和 NaN 这 6 个值为假之外，其他所有的值均为真值。</h6><h6 id="说到-NaN-，就不得不提一下-isNaN-方法，-isNaN-方法自带隐式类型转换，该方法在测试其参数之前，会先调用-Number-方法将其转换为数字。所以-isNaN-‘1’-这个语句中明明用一个字符串去测试，返回值仍然为-false-也就不足为怪了。"><a href="#说到-NaN-，就不得不提一下-isNaN-方法，-isNaN-方法自带隐式类型转换，该方法在测试其参数之前，会先调用-Number-方法将其转换为数字。所以-isNaN-‘1’-这个语句中明明用一个字符串去测试，返回值仍然为-false-也就不足为怪了。" class="headerlink" title="说到 NaN ，就不得不提一下 isNaN() 方法， isNaN() 方法自带隐式类型转换，该方法在测试其参数之前，会先调用 Number() 方法将其转换为数字。所以 isNaN(‘1’) 这个语句中明明用一个字符串去测试，返回值仍然为 false 也就不足为怪了。"></a>说到 NaN ，就不得不提一下 isNaN() 方法， isNaN() 方法自带隐式类型转换，该方法在测试其参数之前，会先调用 Number() 方法将其转换为数字。所以 isNaN(‘1’) 这个语句中明明用一个字符串去测试，返回值仍然为 false 也就不足为怪了。</h6><h6 id="在-号运算中还有一种更复杂的情况，那就是数字-字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行-运算的时候，Javascript-会通过对象的-toString-方法将其自身转换为字符串，然后进行连接操作。"><a href="#在-号运算中还有一种更复杂的情况，那就是数字-字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行-运算的时候，Javascript-会通过对象的-toString-方法将其自身转换为字符串，然后进行连接操作。" class="headerlink" title="在 + 号运算中还有一种更复杂的情况，那就是数字/字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行 + 运算的时候，Javascript 会通过对象的 toString() 方法将其自身转换为字符串，然后进行连接操作。"></a>在 + 号运算中还有一种更复杂的情况，那就是数字/字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行 + 运算的时候，Javascript 会通过对象的 toString() 方法将其自身转换为字符串，然后进行连接操作。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;1&quot; + &#123; toString: function() &#123;return 1;&#125; &#125;    // &quot;11&quot;</div></pre></td></tr></table></figure>
+<h6 id="之所以说它特殊，是因为当一个对象同时包含-toString-和-valueOf-方法的时候，运算符-应该调用哪个方法并不明显-做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。-，Javascript-会盲目的选择-valueOf-方法而不是-toString-来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……"><a href="#之所以说它特殊，是因为当一个对象同时包含-toString-和-valueOf-方法的时候，运算符-应该调用哪个方法并不明显-做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。-，Javascript-会盲目的选择-valueOf-方法而不是-toString-来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……" class="headerlink" title="之所以说它特殊，是因为当一个对象同时包含 toString() 和 valueOf() 方法的时候，运算符 + 应该调用哪个方法并不明显(做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。)，Javascript 会盲目的选择 valueOf() 方法而不是 toString() 来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……"></a>之所以说它特殊，是因为当一个对象同时包含 toString() 和 valueOf() 方法的时候，运算符 + 应该调用哪个方法并不明显(做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。)，Javascript 会盲目的选择 valueOf() 方法而不是 toString() 来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;</div><div class="line">    toString: function() &#123; return &quot;Object CustomObj&quot;; &#125;,</div><div class="line">    valueOf: function() &#123; return 1; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">console.log(&quot;Object: &quot; + obj);    // &quot;Object: 1&quot;</div></pre></td></tr></table></figure>
+<h6 id="总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”-”-在遇到计算时，最好不要进行不同类型的数据计算"><a href="#总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”-”-在遇到计算时，最好不要进行不同类型的数据计算" class="headerlink" title="总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”===”,在遇到计算时，最好不要进行不同类型的数据计算"></a>总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”===”,在遇到计算时，最好不要进行不同类型的数据计算</h6>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/21/一人我编程累/" rel="next" title="一人我编程累">
+                <i class="fa fa-chevron-left"></i> 一人我编程累
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/23/Yarn构建工具入门/" rel="prev" title="Yarn构建工具入门">
+                Yarn构建工具入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/22/神奇的JS之隐式转换/"
+     data-title="神奇的JS之隐式转换"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/02/22/神奇的JS之隐式转换/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/22/神奇的JS之隐式转换/"
+           data-title="神奇的JS之隐式转换" data-url="http://www.wanzhuhao.cn/2017/02/22/神奇的JS之隐式转换/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="ShengNan" />
+          <p class="site-author-name" itemprop="name">ShengNan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在开始探讨这个话题之前，我们先来欣赏几段代码"><span class="nav-number">1.</span> <span class="nav-text">在开始探讨这个话题之前，我们先来欣赏几段代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在-Javascript-中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如-调用非函数对象或者获取-null-undefined-的属性时。"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">我最初是从java开始接触编程的，实际上大多数编程语言中，都会认为上面的表达式有问题，恰巧js不输入这大多数，其实在 Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常。诸如: 调用非函数对象或者获取 null / undefined 的属性时。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">首先，我们要先对常见数据类型做一个受宠度排名，这决定着此数据类型在遇到类型转化时是否能够像大爷一样指挥对方转化成自己的类型，我们通过几个实例来看一下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#那根据以上的总结"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">那根据以上的总结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。"><span class="nav-number">1.0.0.3.1.</span> <span class="nav-text">首先number绝对是当之无愧的大爷，其次boolean的地位显然高于string，至于obj，他比较特殊，除了number之外，其他类型在遇到他时都会同时进行转换。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#需要强调的是，在-Javascript-中，只有-空字符串-、-数字0-、-false-、-null-、-undefined-和-NaN-这-6-个值为假之外，其他所有的值均为真值。"><span class="nav-number">1.0.0.3.2.</span> <span class="nav-text">需要强调的是，在 Javascript 中，只有 空字符串 、 数字0 、 false 、 null 、 undefined 和 NaN 这 6 个值为假之外，其他所有的值均为真值。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#说到-NaN-，就不得不提一下-isNaN-方法，-isNaN-方法自带隐式类型转换，该方法在测试其参数之前，会先调用-Number-方法将其转换为数字。所以-isNaN-‘1’-这个语句中明明用一个字符串去测试，返回值仍然为-false-也就不足为怪了。"><span class="nav-number">1.0.0.3.3.</span> <span class="nav-text">说到 NaN ，就不得不提一下 isNaN() 方法， isNaN() 方法自带隐式类型转换，该方法在测试其参数之前，会先调用 Number() 方法将其转换为数字。所以 isNaN(‘1’) 这个语句中明明用一个字符串去测试，返回值仍然为 false 也就不足为怪了。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#在-号运算中还有一种更复杂的情况，那就是数字-字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行-运算的时候，Javascript-会通过对象的-toString-方法将其自身转换为字符串，然后进行连接操作。"><span class="nav-number">1.0.0.3.4.</span> <span class="nav-text">在 + 号运算中还有一种更复杂的情况，那就是数字/字符串和对象进行运算的时候，上面已经举例说明了数字和对象运算的情况，我们再来说一下字符串和对象运算的情况。当字符串和对象进行 + 运算的时候，Javascript 会通过对象的 toString() 方法将其自身转换为字符串，然后进行连接操作。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#之所以说它特殊，是因为当一个对象同时包含-toString-和-valueOf-方法的时候，运算符-应该调用哪个方法并不明显-做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。-，Javascript-会盲目的选择-valueOf-方法而不是-toString-来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……"><span class="nav-number">1.0.0.3.5.</span> <span class="nav-text">之所以说它特殊，是因为当一个对象同时包含 toString() 和 valueOf() 方法的时候，运算符 + 应该调用哪个方法并不明显(做字符串连接还是加法应该根据其参数类型，但是由于隐式类型转换的存在，类型并不显而易见。)，Javascript 会盲目的选择 valueOf() 方法而不是 toString() 来解决这个问题。这就意味着如果你打算对一个对象做字符串连接的操作，但结果却是……</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”-”-在遇到计算时，最好不要进行不同类型的数据计算"><span class="nav-number">1.0.0.3.6.</span> <span class="nav-text">总而言之，为了防止这些奇怪问题的发生，在遇到比较时，一律使用”===”,在遇到计算时，最好不要进行不同类型的数据计算</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengNan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
