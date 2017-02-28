@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="4.6 重复类模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。12/lo&amp;#123;2&amp;#125;k/.test(&amp;apos;look&amp;apos;) // true/lo&amp;#123;2, 5&amp;#125;k/.test(&amp;apos;looook&amp;apos;) // true">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式笔记2">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记2/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="4.6 重复类模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。12/lo&amp;#123;2&amp;#125;k/.test(&amp;apos;look&amp;apos;) // true/lo&amp;#123;2, 5&amp;#125;k/.test(&amp;apos;looook&amp;apos;) // true">
+<meta property="og:updated_time" content="2017-02-28T13:15:48.226Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式笔记2">
+<meta name="twitter:description" content="4.6 重复类模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。12/lo&amp;#123;2&amp;#125;k/.test(&amp;apos;look&amp;apos;) // true/lo&amp;#123;2, 5&amp;#125;k/.test(&amp;apos;looook&amp;apos;) // true">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记2/"/>
+
+  <title> 正则表达式笔记2 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                正则表达式笔记2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T21:12:00+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/28/正则表达式笔记2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/正则表达式笔记2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="4-6-重复类"><a href="#4-6-重复类" class="headerlink" title="4.6 重复类"></a>4.6 重复类</h5><h6 id="模式的精确匹配次数，使用大括号（-）表示。-n-表示恰好重复n次，-n-表示至少重复n次，-n-m-表示重复不少于n次，不多于m次。"><a href="#模式的精确匹配次数，使用大括号（-）表示。-n-表示恰好重复n次，-n-表示至少重复n次，-n-m-表示重复不少于n次，不多于m次。" class="headerlink" title="模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。"></a>模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/lo&#123;2&#125;k/.test(&apos;look&apos;) // true</div><div class="line">/lo&#123;2, 5&#125;k/.test(&apos;looook&apos;) // true</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h6 id="上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。"><a href="#上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。" class="headerlink" title="上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。"></a>上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。</h6><h5 id="4-7量词符"><a href="#4-7量词符" class="headerlink" title="4.7量词符"></a>4.7量词符</h5><h6 id="量词符用来设定某个模式出现的次数。"><a href="#量词符用来设定某个模式出现的次数。" class="headerlink" title="量词符用来设定某个模式出现的次数。"></a>量词符用来设定某个模式出现的次数。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">? 问号表示某个模式出现0次或1次，等同于&#123;0, 1&#125;。</div><div class="line">* 星号表示某个模式出现0次或多次，等同于&#123;0,&#125;。</div><div class="line">+ 加号表示某个模式出现1次或多次，等同于&#123;1,&#125;。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// t出现0次或1次</div><div class="line">/t?est/.test(&apos;test&apos;) // true</div><div class="line">/t?est/.test(&apos;est&apos;) // true</div><div class="line"></div><div class="line">// t出现1次或多次</div><div class="line">/t+est/.test(&apos;test&quot;) // true</div><div class="line">/t+est/.test(&apos;ttest&apos;) // true</div><div class="line">/t+est/.test(&apos;est&apos;) // false</div><div class="line"></div><div class="line">// t出现0次或多次</div><div class="line">/t*est/.test(&apos;test&apos;) // true</div><div class="line">/t*est/.test(&apos;ttest&apos;) // true</div><div class="line">/t*est/.test(&apos;tttest&apos;) // true</div><div class="line">/t*est/.test(&apos;est&apos;) // true</div></pre></td></tr></table></figure>
+<h5 id="4-8贪婪模式"><a href="#4-8贪婪模式" class="headerlink" title="4.8贪婪模式"></a>4.8贪婪模式</h5><h6 id="上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。"><a href="#上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。" class="headerlink" title="上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。"></a>上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var s = &apos;aaa&apos;;</div><div class="line">s.match(/a+/) // [&quot;aaa&quot;]</div></pre></td></tr></table></figure>
+<h6 id="如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。"><a href="#如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。" class="headerlink" title="如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。"></a>如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var s = &apos;aaa&apos;;</div><div class="line">s.match(/a+?/) // [&quot;a&quot;]</div></pre></td></tr></table></figure>
+<h6 id="除了非贪婪模式的加号，还有非贪婪模式的星号（-）。"><a href="#除了非贪婪模式的加号，还有非贪婪模式的星号（-）。" class="headerlink" title="除了非贪婪模式的加号，还有非贪婪模式的星号（*）。"></a>除了非贪婪模式的加号，还有非贪婪模式的星号（*）。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">*?：表示某个模式出现0次或多次，匹配时采用非贪婪模式。</div><div class="line">+?：表示某个模式出现1次或多次，匹配时采用非贪婪模式。</div></pre></td></tr></table></figure>
+<h5 id="4-9修饰符"><a href="#4-9修饰符" class="headerlink" title="4.9修饰符"></a>4.9修饰符</h5><h6 id="修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。"><a href="#修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。" class="headerlink" title="修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。"></a>修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 单个修饰符</div><div class="line">var regex = /test/i;</div><div class="line"></div><div class="line">// 多个修饰符</div><div class="line">var regex = /test/ig;</div></pre></td></tr></table></figure>
+<ol>
+<li>g修饰符<h6 id="默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。"><a href="#默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。" class="headerlink" title="默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。"></a>默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var regex = /b/;</div><div class="line">var str = &apos;abba&apos;;</div><div class="line"></div><div class="line">regex.test(str); // true</div><div class="line">regex.test(str); // true</div><div class="line">regex.test(str); // true</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。"><a href="#上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。" class="headerlink" title="上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。"></a>上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var regex = /b/g;</div><div class="line">var str = &apos;abba&apos;;</div><div class="line"></div><div class="line">regex.test(str); // true</div><div class="line">regex.test(str); // true</div><div class="line">regex.test(str); // false</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。"><a href="#上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。" class="headerlink" title="上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。"></a>上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。</h6><ol>
+<li>i修饰符<h6 id="默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。"><a href="#默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。" class="headerlink" title="默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。"></a>默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/abc/.test(&apos;ABC&apos;) // false</div><div class="line">/abc/i.test(&apos;ABC&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。"><a href="#上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。" class="headerlink" title="上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。"></a>上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。</h6><ol>
+<li>m修饰符<h6 id="m修饰符表示多行模式（multiline），会修改-和-的行为。默认情况下（即不加m修饰符时），-和-匹配字符串的开始处和结尾处，加上m修饰符以后，-和-还会匹配行首和行尾，即-和-会识别换行符（-n）。"><a href="#m修饰符表示多行模式（multiline），会修改-和-的行为。默认情况下（即不加m修饰符时），-和-匹配字符串的开始处和结尾处，加上m修饰符以后，-和-还会匹配行首和行尾，即-和-会识别换行符（-n）。" class="headerlink" title="m修饰符表示多行模式（multiline），会修改^和$的行为。默认情况下（即不加m修饰符时），^和$匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，即^和$会识别换行符（\n）。"></a>m修饰符表示多行模式（multiline），会修改^和$的行为。默认情况下（即不加m修饰符时），^和$匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，即^和$会识别换行符（\n）。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/world$/.test(&apos;hello world\n&apos;) // false</div><div class="line">/world$/m.test(&apos;hello world\n&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，-可以匹配行尾。"><a href="#上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，-可以匹配行尾。" class="headerlink" title="上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，$可以匹配行尾。"></a>上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，$可以匹配行尾。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/^b/m.test(&apos;a\nb&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。"><a href="#上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。" class="headerlink" title="上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。"></a>上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。</h6><h5 id="4-10组匹配"><a href="#4-10组匹配" class="headerlink" title="4.10组匹配"></a>4.10组匹配</h5><h5 id="（1）概述"><a href="#（1）概述" class="headerlink" title="（1）概述"></a>（1）概述</h5><h6 id="正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。"><a href="#正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。" class="headerlink" title="正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。"></a>正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/fred+/.test(&apos;fredd&apos;) // true</div><div class="line">/(fred)+/.test(&apos;fredfred&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，第一个模式没有括号，结果-只表示重复字母d，第二个模式有括号，结果-就表示匹配“fred”这个词。"><a href="#上面代码中，第一个模式没有括号，结果-只表示重复字母d，第二个模式有括号，结果-就表示匹配“fred”这个词。" class="headerlink" title="上面代码中，第一个模式没有括号，结果+只表示重复字母d，第二个模式有括号，结果+就表示匹配“fred”这个词。"></a>上面代码中，第一个模式没有括号，结果+只表示重复字母d，第二个模式有括号，结果+就表示匹配“fred”这个词。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var m = &apos;abcabc&apos;.match(/(.)b(.)/);</div><div class="line">m</div><div class="line">// [&apos;abc&apos;, &apos;a&apos;, &apos;c&apos;]</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，正则表达式-b-一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。"><a href="#上面代码中，正则表达式-b-一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。" class="headerlink" title="上面代码中，正则表达式/(.)b(.)/一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。"></a>上面代码中，正则表达式/(.)b(.)/一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var m = &apos;abcabc&apos;.match(/(.)b(.)/g);</div><div class="line">m</div><div class="line">// [&apos;abc&apos;, &apos;abc&apos;]</div></pre></td></tr></table></figure>
+<h6 id="上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。"><a href="#上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。" class="headerlink" title="上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。"></a>上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。</h6><h6 id="在正则表达式内部，可以用-n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。"><a href="#在正则表达式内部，可以用-n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。" class="headerlink" title="在正则表达式内部，可以用\n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。"></a>在正则表达式内部，可以用\n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/(.)b(.)\1b\2/.test(&quot;abcabc&quot;)</div><div class="line">// true</div><div class="line">/y(..)(.)\2\1/.test(&apos;yabccab&apos;) // true</div><div class="line">/y((..)\2)\1/.test(&apos;yabababab&apos;) // true</div><div class="line">上面代码中，\1指向外层括号，\2指向内层括号。</div></pre></td></tr></table></figure>
+<h6 id="组匹配非常有用，下面是一个匹配网页标签的例子。"><a href="#组匹配非常有用，下面是一个匹配网页标签的例子。" class="headerlink" title="组匹配非常有用，下面是一个匹配网页标签的例子。"></a>组匹配非常有用，下面是一个匹配网页标签的例子。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var tagName = /&lt;([^&gt;]+)&gt;[^&lt;]*&lt;\/\1&gt;/;</div><div class="line"></div><div class="line">tagName.exec(&quot;&lt;b&gt;bold&lt;/b&gt;&quot;)[1]</div><div class="line">// &apos;b&apos;</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，圆括号匹配尖括号之中的标签，而-1就表示对应的闭合标签。"><a href="#上面代码中，圆括号匹配尖括号之中的标签，而-1就表示对应的闭合标签。" class="headerlink" title="上面代码中，圆括号匹配尖括号之中的标签，而\1就表示对应的闭合标签。"></a>上面代码中，圆括号匹配尖括号之中的标签，而\1就表示对应的闭合标签。</h6><h6 id="上面代码略加修改，就能捕获带有属性的标签。"><a href="#上面代码略加修改，就能捕获带有属性的标签。" class="headerlink" title="上面代码略加修改，就能捕获带有属性的标签。"></a>上面代码略加修改，就能捕获带有属性的标签。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var html = &apos;&lt;b class=&quot;hello&quot;&gt;Hello&lt;/b&gt;&lt;i&gt;world&lt;/i&gt;&apos;;</div><div class="line">var tag = /&lt;(\w+)([^&gt;]*)&gt;(.*?)&lt;\/\1&gt;/g;</div><div class="line"></div><div class="line">var match = tag.exec(html);</div><div class="line"></div><div class="line">match[1] // &quot;b&quot;</div><div class="line">match[2] // &quot;class=&quot;hello&quot;&quot;</div><div class="line">match[3] // &quot;Hello&quot;</div><div class="line"></div><div class="line">match = tag.exec(html);</div><div class="line"></div><div class="line">match[1] // &quot;i&quot;</div><div class="line">match[2] // &quot;&quot;</div><div class="line">match[3] // &quot;world&quot;</div></pre></td></tr></table></figure>
+<h5 id="（2）非捕获组"><a href="#（2）非捕获组" class="headerlink" title="（2）非捕获组"></a>（2）非捕获组</h5><h6 id="x-称为非捕获组（Non-capturing-group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。"><a href="#x-称为非捕获组（Non-capturing-group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。" class="headerlink" title="(?:x)称为非捕获组（Non-capturing group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。"></a>(?:x)称为非捕获组（Non-capturing group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。</h6><h6 id="非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成-foo-1-2-，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为-foo-1-2-，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。"><a href="#非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成-foo-1-2-，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为-foo-1-2-，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。" class="headerlink" title="非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成/(foo){1, 2}/，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为/(?:foo){1, 2}/，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。"></a>非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成/(foo){1, 2}/，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为/(?:foo){1, 2}/，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var m = &apos;abc&apos;.match(/(?:.)b(.)/);</div><div class="line">m // [&quot;abc&quot;, &quot;c&quot;]</div></pre></td></tr></table></figure>
+<h6 id="上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。"><a href="#上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。" class="headerlink" title="上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。"></a>上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 正常匹配</div><div class="line">var url = /(http|ftp):\/\/([^/\r\n]+)(\/[^\r\n]*)?/;</div><div class="line"></div><div class="line">url.exec(&apos;http://google.com/&apos;);</div><div class="line">// [&quot;http://google.com/&quot;, &quot;http&quot;, &quot;google.com&quot;, &quot;/&quot;]</div><div class="line"></div><div class="line">// 非捕获组匹配</div><div class="line">var url = /(?:http|ftp):\/\/([^/\r\n]+)(\/[^\r\n]*)?/;</div><div class="line"></div><div class="line">url.exec(&apos;http://google.com/&apos;);</div><div class="line">// [&quot;http://google.com/&quot;, &quot;google.com&quot;, &quot;/&quot;]</div></pre></td></tr></table></figure>
+<h6 id="上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。"><a href="#上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。" class="headerlink" title="上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。"></a>上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。</h6><h5 id="（3）先行断言"><a href="#（3）先行断言" class="headerlink" title="（3）先行断言"></a>（3）先行断言</h5><h6 id="x-y-称为先行断言（Positive-look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成-d-。"><a href="#x-y-称为先行断言（Positive-look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成-d-。" class="headerlink" title="x(?=y)称为先行断言（Positive look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成/\d+(?=%)/。"></a>x(?=y)称为先行断言（Positive look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成/\d+(?=%)/。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var m = &apos;abc&apos;.match(/b(?=c)/);</div><div class="line">m // [&quot;b&quot;]</div><div class="line">/Jack (?=Sprat|Frost)/.test(&apos;Jack Frost&apos;) // true</div></pre></td></tr></table></figure>
+<h5 id="（4）先行否定断言"><a href="#（4）先行否定断言" class="headerlink" title="（4）先行否定断言"></a>（4）先行否定断言</h5><h6 id="x-y-称为先行否定断言（Negative-look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成-d-。"><a href="#x-y-称为先行否定断言（Negative-look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成-d-。" class="headerlink" title="x(?!y)称为先行否定断言（Negative look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成/\d+(?!%)/。"></a>x(?!y)称为先行否定断言（Negative look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成/\d+(?!%)/。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/\d+(?!\.)/.exec(&apos;3.14&apos;)</div><div class="line">// [&quot;14&quot;]</div><div class="line">var m = &apos;abd&apos;.match(/b(?!c)/);</div><div class="line">m // [&apos;b&apos;]</div></pre></td></tr></table></figure>
+<h6 id="上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。"><a href="#上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。" class="headerlink" title="上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。"></a>上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。</h6><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=416449&auto=1&height=32"></iframe>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/正则表达式笔记1/" rel="next" title="正则表达式笔记1">
+                <i class="fa fa-chevron-left"></i> 正则表达式笔记1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/28/正则表达式笔记2/"
+     data-title="正则表达式笔记2"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记2/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/28/正则表达式笔记2/"
+           data-title="正则表达式笔记2" data-url="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="ShengNan" />
+          <p class="site-author-name" itemprop="name">ShengNan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-重复类"><span class="nav-number">1.</span> <span class="nav-text">4.6 重复类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#模式的精确匹配次数，使用大括号（-）表示。-n-表示恰好重复n次，-n-表示至少重复n次，-n-m-表示重复不少于n次，不多于m次。"><span class="nav-number">1.1.</span> <span class="nav-text">模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。"><span class="nav-number">1.2.</span> <span class="nav-text">上面代码中，第一个模式指定o连续出现2次，第二个模式指定o连续出现2次到5次之间。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-7量词符"><span class="nav-number">2.</span> <span class="nav-text">4.7量词符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#量词符用来设定某个模式出现的次数。"><span class="nav-number">2.1.</span> <span class="nav-text">量词符用来设定某个模式出现的次数。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-8贪婪模式"><span class="nav-number">3.</span> <span class="nav-text">4.8贪婪模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。"><span class="nav-number">3.1.</span> <span class="nav-text">上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。"><span class="nav-number">3.2.</span> <span class="nav-text">如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#除了非贪婪模式的加号，还有非贪婪模式的星号（-）。"><span class="nav-number">3.3.</span> <span class="nav-text">除了非贪婪模式的加号，还有非贪婪模式的星号（*）。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-9修饰符"><span class="nav-number">4.</span> <span class="nav-text">4.9修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。"><span class="nav-number">4.1.</span> <span class="nav-text">修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。修饰符可以单个使用，也可以多个一起使用。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。"><span class="nav-number">4.2.</span> <span class="nav-text">默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。g修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。"><span class="nav-number">4.3.</span> <span class="nav-text">上面代码中，正则模式不含g修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回true。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。"><span class="nav-number">4.4.</span> <span class="nav-text">上面代码中，正则模式含有g修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串“abba”只有两个“b”，所以前两次匹配结果为true，第三次匹配结果为false。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。"><span class="nav-number">4.5.</span> <span class="nav-text">默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignorecase）。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。"><span class="nav-number">4.6.</span> <span class="nav-text">上面代码表示，加了i修饰符以后，不考虑大小写，所以模式abc匹配字符串ABC。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#m修饰符表示多行模式（multiline），会修改-和-的行为。默认情况下（即不加m修饰符时），-和-匹配字符串的开始处和结尾处，加上m修饰符以后，-和-还会匹配行首和行尾，即-和-会识别换行符（-n）。"><span class="nav-number">4.7.</span> <span class="nav-text">m修饰符表示多行模式（multiline），会修改^和$的行为。默认情况下（即不加m修饰符时），^和$匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，即^和$会识别换行符（\n）。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，-可以匹配行尾。"><span class="nav-number">4.8.</span> <span class="nav-text">上面的代码中，字符串结尾处有一个换行符。如果不加m修饰符，匹配不成功，因为字符串的结尾不是“world”；加上以后，$可以匹配行尾。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。"><span class="nav-number">4.9.</span> <span class="nav-text">上面代码要求匹配行首的b，如果不加m修饰符，就相当于b只能处在字符串的开始处。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-10组匹配"><span class="nav-number">5.</span> <span class="nav-text">4.10组匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）概述"><span class="nav-number">6.</span> <span class="nav-text">（1）概述</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。"><span class="nav-number">6.1.</span> <span class="nav-text">正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，第一个模式没有括号，结果-只表示重复字母d，第二个模式有括号，结果-就表示匹配“fred”这个词。"><span class="nav-number">6.2.</span> <span class="nav-text">上面代码中，第一个模式没有括号，结果+只表示重复字母d，第二个模式有括号，结果+就表示匹配“fred”这个词。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，正则表达式-b-一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。"><span class="nav-number">6.3.</span> <span class="nav-text">上面代码中，正则表达式/(.)b(.)/一共使用两个括号，第一个括号捕获a，第二个括号捕获c。注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。"><span class="nav-number">6.4.</span> <span class="nav-text">上面代码使用带g修饰符的正则表达式，结果match方法只捕获了匹配整个表达式的部分。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#在正则表达式内部，可以用-n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。"><span class="nav-number">6.5.</span> <span class="nav-text">在正则表达式内部，可以用\n引用括号匹配的内容，n是从1开始的自然数，表示对应顺序的括号。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#组匹配非常有用，下面是一个匹配网页标签的例子。"><span class="nav-number">6.6.</span> <span class="nav-text">组匹配非常有用，下面是一个匹配网页标签的例子。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，圆括号匹配尖括号之中的标签，而-1就表示对应的闭合标签。"><span class="nav-number">6.7.</span> <span class="nav-text">上面代码中，圆括号匹配尖括号之中的标签，而\1就表示对应的闭合标签。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码略加修改，就能捕获带有属性的标签。"><span class="nav-number">6.8.</span> <span class="nav-text">上面代码略加修改，就能捕获带有属性的标签。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）非捕获组"><span class="nav-number">7.</span> <span class="nav-text">（2）非捕获组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x-称为非捕获组（Non-capturing-group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。"><span class="nav-number">7.1.</span> <span class="nav-text">(?:x)称为非捕获组（Non-capturing group），表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成-foo-1-2-，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为-foo-1-2-，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。"><span class="nav-number">7.2.</span> <span class="nav-text">非捕获组的作用请考虑这样一个场景，假定需要匹配foo或者foofoo，正则表达式就应该写成/(foo){1, 2}/，但是这样会占用一个组匹配。这时，就可以使用非捕获组，将正则表达式改为/(?:foo){1, 2}/，它的作用与前一个正则是一样的，但是不会单独输出括号内部的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。"><span class="nav-number">7.3.</span> <span class="nav-text">上面代码中的模式，一共使用了两个括号。其中第一个括号是非捕获组，所以最后返回的结果中没有第一个括号，只有第二个括号匹配的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。"><span class="nav-number">7.4.</span> <span class="nav-text">上面的代码中，前一个正则表达式是正常匹配，第一个括号返回网络协议；后一个正则表达式是非捕获匹配，返回结果中不包括网络协议。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）先行断言"><span class="nav-number">8.</span> <span class="nav-text">（3）先行断言</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x-y-称为先行断言（Positive-look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成-d-。"><span class="nav-number">8.1.</span> <span class="nav-text">x(?=y)称为先行断言（Positive look-ahead），x只有在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟着百分号的数字，可以写成/\d+(?=%)/。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（4）先行否定断言"><span class="nav-number">9.</span> <span class="nav-text">（4）先行否定断言</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x-y-称为先行否定断言（Negative-look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成-d-。"><span class="nav-number">9.1.</span> <span class="nav-text">x(?!y)称为先行否定断言（Negative look-ahead），x只有不在y前面才匹配，y不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成/\d+(?!%)/。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。"><span class="nav-number">9.2.</span> <span class="nav-text">上面的代码使用了先行否定断言，b不在c前面所以被匹配，而且括号对应的d不会被返回。</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengNan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

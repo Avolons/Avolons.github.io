@@ -1,0 +1,757 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="js正则对象RegExp1.js正则概述新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。12var regex = /xyz/;var regex = new RegExp(&amp;apos;xyz&amp;apos;);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式笔记1">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记1/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="js正则对象RegExp1.js正则概述新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。12var regex = /xyz/;var regex = new RegExp(&amp;apos;xyz&amp;apos;);">
+<meta property="og:updated_time" content="2017-02-28T13:16:56.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式笔记1">
+<meta name="twitter:description" content="js正则对象RegExp1.js正则概述新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。12var regex = /xyz/;var regex = new RegExp(&amp;apos;xyz&amp;apos;);">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记1/"/>
+
+  <title> 正则表达式笔记1 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                正则表达式笔记1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T21:11:00+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/28/正则表达式笔记1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/正则表达式笔记1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="js正则对象RegExp"><a href="#js正则对象RegExp" class="headerlink" title="js正则对象RegExp"></a>js正则对象RegExp</h2><h4 id="1-js正则概述"><a href="#1-js正则概述" class="headerlink" title="1.js正则概述"></a>1.js正则概述</h4><h6 id="新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。"><a href="#新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。" class="headerlink" title="新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。"></a>新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var regex = /xyz/;</div><div class="line">var regex = new RegExp(&apos;xyz&apos;);</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h6 id="上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。"><a href="#上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。" class="headerlink" title="上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。"></a>上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。</h6><h5 id="正则对象生成以后，有两种使用方式："><a href="#正则对象生成以后，有两种使用方式：" class="headerlink" title="正则对象生成以后，有两种使用方式："></a>正则对象生成以后，有两种使用方式：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//正则对象的方法：将字符串作为参数，比如</div><div class="line">regex.test(string)</div><div class="line">//字符串对象的方法：将正则对象作为参数，比如</div><div class="line">string.match(regex)</div></pre></td></tr></table></figure>
+<h4 id="2-1正则对象的属性和方法"><a href="#2-1正则对象的属性和方法" class="headerlink" title="2.1正则对象的属性和方法"></a>2.1正则对象的属性和方法</h4><h5 id="正则对象的属性分成两类。"><a href="#正则对象的属性分成两类。" class="headerlink" title="正则对象的属性分成两类。"></a>正则对象的属性分成两类。</h5><ol>
+<li>一类是修饰符相关，返回一个布尔值，表示对应的修饰符是否设置。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var r = /abc/igm;</div><div class="line"></div><div class="line">r.ignoreCase // true</div><div class="line">r.global // true</div><div class="line">r.multiline // true</div><div class="line">//ignoreCase：返回一个布尔值，表示是否设置了i修饰符，该属性只读。</div><div class="line">//global：返回一个布尔值，表示是否设置了g修饰符，该属性只读。</div><div class="line">//multiline：返回一个布尔值，表示是否设置了m修饰符，该属性只读。</div></pre></td></tr></table></figure>
+<ol>
+<li>另一类是与修饰符无关的属性，主要是下面两个。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var r = /abc/igm;</div><div class="line"></div><div class="line">r.lastIndex // 0</div><div class="line">r.source // &quot;abc&quot;</div><div class="line">//lastIndex：返回下一次开始搜索的位置。该属性可读写，但是只在设置了g修饰符时有意义。</div><div class="line">//source：返回正则表达式的字符串形式（不包括反斜杠），该属性只读。</div></pre></td></tr></table></figure>
+<h4 id="2-2-test"><a href="#2-2-test" class="headerlink" title="2.2 test()"></a>2.2 test()</h4><h5 id="正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。"><a href="#正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。" class="headerlink" title="正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。"></a>正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/cat/.test(&apos;cats and dogs&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。"><a href="#如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。" class="headerlink" title="如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。"></a>如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var r = /x/g;</div><div class="line">var s = &apos;_x_x&apos;;</div><div class="line"></div><div class="line">r.lastIndex // 0</div><div class="line">r.test(s) // true</div><div class="line"></div><div class="line">r.lastIndex // 2</div><div class="line">r.test(s) // true</div><div class="line"></div><div class="line">r.lastIndex // 4</div><div class="line">r.test(s) // false</div></pre></td></tr></table></figure>
+<h6 id="带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。"><a href="#带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。" class="headerlink" title="带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。"></a>带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var r = /x/g;</div><div class="line">var s = &apos;_x_x&apos;;</div><div class="line"></div><div class="line">r.lastIndex = 4;</div><div class="line">r.test(s) // false</div><div class="line">//上面代码指定从字符串的第五个位置开始搜索，这个位置是没有字符的，所以返回false。</div></pre></td></tr></table></figure>
+<h4 id="2-3-exec"><a href="#2-3-exec" class="headerlink" title="2.3 exec()"></a>2.3 exec()</h4><h5 id="正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。"><a href="#正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。" class="headerlink" title="正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。"></a>正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var s = &apos;_x_x&apos;;</div><div class="line">var r1 = /x/;</div><div class="line">var r2 = /y/;</div><div class="line"></div><div class="line">r1.exec(s) // [&quot;x&quot;]</div><div class="line">r2.exec(s) // null</div></pre></td></tr></table></figure>
+<h6 id="如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。"><a href="#如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。" class="headerlink" title="如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。"></a>如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var s = &apos;_x_x&apos;;</div><div class="line">var r = /_(x)/;</div><div class="line"></div><div class="line">r.exec(s) // [&quot;_x&quot;, &quot;x&quot;]</div></pre></td></tr></table></figure>
+<h6 id="exec方法的返回数组还包含以下两个属性："><a href="#exec方法的返回数组还包含以下两个属性：" class="headerlink" title="exec方法的返回数组还包含以下两个属性："></a>exec方法的返回数组还包含以下两个属性：</h6><ol>
+<li>input：整个原字符串。</li>
+<li>index：整个模式匹配成功的开始位置（从0开始计数）。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var r = /a(b+)a/;</div><div class="line">var arr = r.exec(&apos;_abbba_aba_&apos;);</div><div class="line"></div><div class="line">arr // [&quot;abbba&quot;, &quot;bbb&quot;]</div><div class="line"></div><div class="line">arr.index // 1</div><div class="line">arr.input // &quot;_abbba_aba_&quot;</div></pre></td></tr></table></figure>
+<h6 id="如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。"><a href="#如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。" class="headerlink" title="如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。"></a>如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var r = /a(b+)a/g;</div><div class="line"></div><div class="line">var a1 = r.exec(&apos;_abbba_aba_&apos;);</div><div class="line">a1 // [&apos;abbba&apos;, &apos;bbb&apos;]</div><div class="line">a1.index // 1</div><div class="line">r.lastIndex // 6</div><div class="line"></div><div class="line">var a2 = r.exec(&apos;_abbba_aba_&apos;);</div><div class="line">a2 // [&apos;aba&apos;, &apos;b&apos;]</div><div class="line">a2.index // 7</div><div class="line">r.lastIndex // 10</div><div class="line"></div><div class="line">var a3 = r.exec(&apos;_abbba_aba_&apos;);</div><div class="line">a3 // null</div><div class="line">a3.index // TypeError: Cannot read property &apos;index&apos; of null</div><div class="line">r.lastIndex // 0</div><div class="line"></div><div class="line">var a4 = r.exec(&apos;_abbba_aba_&apos;);</div><div class="line">a4 // [&apos;abbba&apos;, &apos;bbb&apos;]</div><div class="line">a4.index // 1</div><div class="line">r.lastIndex // 6</div></pre></td></tr></table></figure>
+<h6 id="上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。"><a href="#上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。" class="headerlink" title="上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。"></a>上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。</h6><h5 id="利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。"><a href="#利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。" class="headerlink" title="利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。"></a>利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var r = /a(b+)a/g;</div><div class="line">var s = &apos;_abbba_aba_&apos;;</div><div class="line"></div><div class="line">while(true) &#123;</div><div class="line">  var match = r.exec(s);</div><div class="line">  if (!match) break;</div><div class="line">  console.log(match[1]);</div><div class="line">&#125;</div><div class="line">// bbb</div><div class="line">// b</div></pre></td></tr></table></figure>
+<h4 id="3-字符串对象的方法"><a href="#3-字符串对象的方法" class="headerlink" title="3.字符串对象的方法"></a>3.字符串对象的方法</h4><h5 id="字符串对象的方法之中，有4种与正则对象有关"><a href="#字符串对象的方法之中，有4种与正则对象有关" class="headerlink" title="字符串对象的方法之中，有4种与正则对象有关."></a>字符串对象的方法之中，有4种与正则对象有关.</h5><ol>
+<li>match()：返回一个数组，成员是所有匹配的子字符串。</li>
+<li>search()：按照给定的正则表达式进行搜索，返回一个整数，表示匹配开始的位置。</li>
+<li>replace()：按照给定的正则表达式进行替换，返回替换后的字符串。</li>
+<li>split()：按照给定规则进行字符串分割，返回一个数组，包含分割后的各个成员。</li>
+</ol>
+<h5 id="3-1-String-prototype-match"><a href="#3-1-String-prototype-match" class="headerlink" title="3.1 String.prototype.match()"></a>3.1 String.prototype.match()</h5><h6 id="字符串对象的match方法对字符串进行正则匹配，返回匹配结果。"><a href="#字符串对象的match方法对字符串进行正则匹配，返回匹配结果。" class="headerlink" title="字符串对象的match方法对字符串进行正则匹配，返回匹配结果。"></a>字符串对象的match方法对字符串进行正则匹配，返回匹配结果。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var s = &apos;_x_x&apos;;</div><div class="line">var r1 = /x/;</div><div class="line">var r2 = /y/;</div><div class="line"></div><div class="line">s.match(r1) // [&quot;x&quot;]</div><div class="line">s.match(r2) // null</div></pre></td></tr></table></figure>
+<h6 id="如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。"><a href="#如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。" class="headerlink" title="如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。"></a>如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var s = &apos;abba&apos;;</div><div class="line">var r = /a/g;</div><div class="line"></div><div class="line">s.match(r) // [&quot;a&quot;, &quot;a&quot;]</div><div class="line">r.exec(s) // [&quot;a&quot;]</div></pre></td></tr></table></figure>
+<h6 id="设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。"><a href="#设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。" class="headerlink" title="设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。"></a>设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。</h6><h5 id="3-2-String-prototype-search"><a href="#3-2-String-prototype-search" class="headerlink" title="3.2 String.prototype.search()"></a>3.2 String.prototype.search()</h5><h6 id="字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。"><a href="#字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。" class="headerlink" title="字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。"></a>字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;_x_x&apos;.search(/x/)</div><div class="line">// 1</div></pre></td></tr></table></figure>
+<h6 id="该方法会忽略g修饰符。"><a href="#该方法会忽略g修饰符。" class="headerlink" title="该方法会忽略g修饰符。"></a>该方法会忽略g修饰符。</h6><h5 id="3-3-String-prototype-replace"><a href="#3-3-String-prototype-replace" class="headerlink" title="3.3 String.prototype.replace()"></a>3.3 String.prototype.replace()</h5><h6 id="字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。"><a href="#字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。" class="headerlink" title="字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。"></a>字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.replace(search, replacement)</div></pre></td></tr></table></figure>
+<h6 id="搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值"><a href="#搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值" class="headerlink" title="搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值."></a>搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值.</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&apos;aaa&apos;.replace(&apos;a&apos;, &apos;b&apos;) // &quot;baa&quot;</div><div class="line">&apos;aaa&apos;.replace(/a/, &apos;b&apos;) // &quot;baa&quot;</div><div class="line">&apos;aaa&apos;.replace(/a/g, &apos;b&apos;) // &quot;bbb&quot;</div></pre></td></tr></table></figure>
+<h6 id="replace方法的一个应用，就是消除字符串首尾两端的空格。"><a href="#replace方法的一个应用，就是消除字符串首尾两端的空格。" class="headerlink" title="replace方法的一个应用，就是消除字符串首尾两端的空格。"></a>replace方法的一个应用，就是消除字符串首尾两端的空格。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var str = &apos;  #id div.class  &apos;;</div><div class="line"></div><div class="line">str.replace(/^\s+|\s+$/g, &apos;&apos;)</div><div class="line">// &quot;#id div.class&quot;</div></pre></td></tr></table></figure>
+<h6 id="replace方法的第二个参数可以使用美元符号-，用来指代所替换的内容。"><a href="#replace方法的第二个参数可以使用美元符号-，用来指代所替换的内容。" class="headerlink" title="replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。"></a>replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。</h6><ol>
+<li>$&amp; 指代匹配的子字符串。</li>
+<li>$` 指代匹配结果前面的文本。</li>
+<li>$’ 指代匹配结果后面的文本。</li>
+<li>$n 指代匹配成功的第n组内容，n是从1开始的自然数。</li>
+<li>$$ 指代美元符号$。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&apos;hello world&apos;.replace(/(\w+)\s(\w+)/, &apos;$2 $1&apos;)</div><div class="line">// &quot;world hello&quot;</div><div class="line"></div><div class="line">&apos;abc&apos;.replace(&apos;b&apos;, &apos;[$`-$&amp;-$\&apos;]&apos;)</div><div class="line">// &quot;a[a-b-c]c&quot;</div></pre></td></tr></table></figure>
+<h6 id="replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。"><a href="#replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。" class="headerlink" title="replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。"></a>replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&apos;3 and 5&apos;.replace(/[0-9]+/g, function(match)&#123;</div><div class="line">  return 2 * match;</div><div class="line">&#125;)</div><div class="line">// &quot;6 and 10&quot;</div><div class="line"></div><div class="line">var a = &apos;The quick brown fox jumped over the lazy dog.&apos;;</div><div class="line">var pattern = /quick|brown|lazy/ig;</div><div class="line"></div><div class="line">a.replace(pattern, function replacer(match) &#123;</div><div class="line">  return match.toUpperCase();</div><div class="line">&#125;);</div><div class="line">// The QUICK BROWN fox jumped over the LAZY dog.</div></pre></td></tr></table></figure>
+<h6 id="作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。"><a href="#作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。" class="headerlink" title="作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。"></a>作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。</h6><p>==第一眼看下去，完全不知道说的啥==</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var prices = &#123;</div><div class="line">  &apos;pr_1&apos;: &apos;$1.99&apos;,</div><div class="line">  &apos;pr_2&apos;: &apos;$9.99&apos;,</div><div class="line">  &apos;pr_3&apos;: &apos;$5.00&apos;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var template = &apos;/* ... */&apos;; // 这里可以放网页模块字符串</div><div class="line"></div><div class="line">template.replace(</div><div class="line">  /(&lt;span id=&quot;)(.*?)(&quot;&gt;)(&lt;\/span&gt;)/g,</div><div class="line">  function(match, $1, $2, $3, $4)&#123;</div><div class="line">    return $1 + $2 + $3 + prices[$2] + $4;</div><div class="line">  &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<h6 id="估计目前主流的那些mvvm框架都是用此方式实现的"><a href="#估计目前主流的那些mvvm框架都是用此方式实现的" class="headerlink" title="估计目前主流的那些mvvm框架都是用此方式实现的"></a>估计目前主流的那些mvvm框架都是用此方式实现的</h6><h5 id="3-4-String-prototype-split"><a href="#3-4-String-prototype-split" class="headerlink" title="3.4 String.prototype.split()"></a>3.4 String.prototype.split()</h5><h6 id="字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。"><a href="#字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。" class="headerlink" title="字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。"></a>字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.split(separator, [limit])</div></pre></td></tr></table></figure>
+<h6 id="该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。"><a href="#该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。" class="headerlink" title="该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。"></a>该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 非正则分隔</div><div class="line">&apos;a,  b,c, d&apos;.split(&apos;,&apos;)</div><div class="line">// [ &apos;a&apos;, &apos;  b&apos;, &apos;c&apos;, &apos; d&apos; ]</div><div class="line"></div><div class="line">// 正则分隔，去除多余的空格</div><div class="line">&apos;a,  b,c, d&apos;.split(/, */)</div><div class="line">// [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos; ]</div><div class="line"></div><div class="line">// 指定返回数组的最大成员</div><div class="line">&apos;a,  b,c, d&apos;.split(/, */, 2)</div><div class="line">[ &apos;a&apos;, &apos;b&apos; ]</div></pre></td></tr></table></figure>
+<h6 id="上面代码使用正则表达式，去除了子字符串的逗号后面的空格。"><a href="#上面代码使用正则表达式，去除了子字符串的逗号后面的空格。" class="headerlink" title="上面代码使用正则表达式，去除了子字符串的逗号后面的空格。"></a>上面代码使用正则表达式，去除了子字符串的逗号后面的空格。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 例一</div><div class="line">&apos;aaa*a*&apos;.split(/a*/)</div><div class="line">// [ &apos;&apos;, &apos;*&apos;, &apos;*&apos; ]</div><div class="line"></div><div class="line">// 例二</div><div class="line">&apos;aaa**a*&apos;.split(/a*/)</div><div class="line">// [&quot;&quot;, &quot;*&quot;, &quot;*&quot;, &quot;*&quot;]</div></pre></td></tr></table></figure>
+<h6 id="上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。"><a href="#上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。" class="headerlink" title="上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。"></a>上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。</h6><h4 id="4-匹配规则"><a href="#4-匹配规则" class="headerlink" title="4.匹配规则"></a>4.匹配规则</h4><h5 id="4-1-字面量字符和元字符"><a href="#4-1-字面量字符和元字符" class="headerlink" title="4.1 字面量字符和元字符"></a>4.1 字面量字符和元字符</h5><h6 id="大部分字符在正则表达式中，就是字面的含义，比如-a-匹配a，-b-匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal-characters）。"><a href="#大部分字符在正则表达式中，就是字面的含义，比如-a-匹配a，-b-匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal-characters）。" class="headerlink" title="大部分字符在正则表达式中，就是字面的含义，比如/a/匹配a，/b/匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal characters）。"></a>大部分字符在正则表达式中，就是字面的含义，比如/a/匹配a，/b/匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal characters）。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dog/.test(&quot;old dog&quot;) // true</div></pre></td></tr></table></figure>
+<h6 id="除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。"><a href="#除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。" class="headerlink" title="除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。"></a>除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。</h6><ol>
+<li>点字符（.)<h6 id="点字符（-）匹配除回车（-r）、换行-n-、行分隔符（-u2028）和段分隔符（-u2029）以外的所有字符。"><a href="#点字符（-）匹配除回车（-r）、换行-n-、行分隔符（-u2028）和段分隔符（-u2029）以外的所有字符。" class="headerlink" title="点字符（.）匹配除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符。"></a>点字符（.）匹配除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c.t/</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，c-t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。"><a href="#上面代码中，c-t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。" class="headerlink" title="上面代码中，c.t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。"></a>上面代码中，c.t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。</h6><ol>
+<li>位置字符<h6 id="位置字符用来提示字符所处的位置，主要有两个字符。1-表示字符串的开始位置。2-表示字符串的结束位置"><a href="#位置字符用来提示字符所处的位置，主要有两个字符。1-表示字符串的开始位置。2-表示字符串的结束位置" class="headerlink" title="位置字符用来提示字符所处的位置，主要有两个字符。1. ^ 表示字符串的开始位置。2.$ 表示字符串的结束位置"></a>位置字符用来提示字符所处的位置，主要有两个字符。1. ^ 表示字符串的开始位置。2.$ 表示字符串的结束位置</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// test必须出现在开始位置</div><div class="line">/^test/.test(&apos;test123&apos;) // true</div><div class="line"></div><div class="line">// test必须出现在结束位置</div><div class="line">/test$/.test(&apos;new test&apos;) // true</div><div class="line"></div><div class="line">// 从开始位置到结束位置只有test</div><div class="line">/^test$/.test(&apos;test&apos;) // true</div><div class="line">/^test$/.test(&apos;test test&apos;) // false</div></pre></td></tr></table></figure>
+<ol>
+<li>选择符（|）<h6 id="竖线符号（-）在正则表达式中表示“或关系”（OR），即cat-dog表示匹配cat或dog。"><a href="#竖线符号（-）在正则表达式中表示“或关系”（OR），即cat-dog表示匹配cat或dog。" class="headerlink" title="竖线符号（|）在正则表达式中表示“或关系”（OR），即cat|dog表示匹配cat或dog。"></a>竖线符号（|）在正则表达式中表示“或关系”（OR），即cat|dog表示匹配cat或dog。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/11|22/.test(&apos;911&apos;) // true</div><div class="line">// 匹配fred、barney、betty之中的一个</div><div class="line">/fred|barney|betty/</div><div class="line">/a( |\t)b/.test(&apos;a\tb&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="其他的元字符还包括-、-、-、-、-、-、-等，将在下文解释。"><a href="#其他的元字符还包括-、-、-、-、-、-、-等，将在下文解释。" class="headerlink" title="其他的元字符还包括\、*、+、?、()、[]、{}等，将在下文解释。"></a>其他的元字符还包括\、*、+、?、()、[]、{}等，将在下文解释。</h6><h5 id="4-2-转义符"><a href="#4-2-转义符" class="headerlink" title="4.2 转义符"></a>4.2 转义符</h5><h6 id="正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成-。"><a href="#正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成-。" class="headerlink" title="正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成+。"></a>正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成+。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/1+1/.test(&apos;1+1&apos;)</div><div class="line">// false</div><div class="line"></div><div class="line">/1\+1/.test(&apos;1+1&apos;)</div><div class="line">// true</div></pre></td></tr></table></figure>
+<h6 id="正则模式中，需要用斜杠转义的，一共有12个字符：-、-、-、-、-、-、-、-、-、-、-和-。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。"><a href="#正则模式中，需要用斜杠转义的，一共有12个字符：-、-、-、-、-、-、-、-、-、-、-和-。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。" class="headerlink" title="正则模式中，需要用斜杠转义的，一共有12个字符：^、.、[、$、(、)、|、*、+、?、{和\。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。"></a>正则模式中，需要用斜杠转义的，一共有12个字符：^、.、[、$、(、)、|、*、+、?、{和\。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(new RegExp(&apos;1\+1&apos;)).test(&apos;1+1&apos;)</div><div class="line">// false</div><div class="line"></div><div class="line">(new RegExp(&apos;1\\+1&apos;)).test(&apos;1+1&apos;)</div><div class="line">// true</div></pre></td></tr></table></figure>
+<h5 id="4-3-正则表达式对一些不能打印的特殊字符，提供了表达方法。"><a href="#4-3-正则表达式对一些不能打印的特殊字符，提供了表达方法。" class="headerlink" title="4.3 正则表达式对一些不能打印的特殊字符，提供了表达方法。"></a>4.3 正则表达式对一些不能打印的特殊字符，提供了表达方法。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\cX 表示Ctrl-[X]，其中的X是A-Z之中任一个英文字母，用来匹配控制字符。</div><div class="line">[\b] 匹配退格键(U+0008)，不要与\b混淆。</div><div class="line">\n 匹配换行键。</div><div class="line">\r 匹配回车键。</div><div class="line">\t 匹配制表符tab（U+0009）。</div><div class="line">\v 匹配垂直制表符（U+000B）。</div><div class="line">\f 匹配换页符（U+000C）。</div><div class="line">\0 匹配null字符（U+0000）。</div><div class="line">\xhh 匹配一个以两位十六进制数（\x00-\xFF）表示的字符。</div><div class="line">\uhhhh 匹配一个以四位十六进制数（\u0000-\uFFFF）表示的unicode字符。</div></pre></td></tr></table></figure>
+<h5 id="4-4-字符类"><a href="#4-4-字符类" class="headerlink" title="4.4 字符类"></a>4.4 字符类</h5><h6 id="字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如-xyz-表示x、y、z之中任选一个匹配。"><a href="#字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如-xyz-表示x、y、z之中任选一个匹配。" class="headerlink" title="字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如[xyz] 表示x、y、z之中任选一个匹配。"></a>字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如[xyz] 表示x、y、z之中任选一个匹配。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/[abc]/.test(&apos;hello world&apos;) // false</div><div class="line">/[abc]/.test(&apos;apple&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="有两个字符在字符类中有特殊含义。"><a href="#有两个字符在字符类中有特殊含义。" class="headerlink" title="有两个字符在字符类中有特殊含义。"></a>有两个字符在字符类中有特殊含义。</h6><ol>
+<li>脱字符（^）<h6 id="如果方括号内的第一个字符是-，则表示除了字符类之中的字符，其他字符都可以匹配。比如，-xyz-表示除了x、y、z之外都可以匹配。"><a href="#如果方括号内的第一个字符是-，则表示除了字符类之中的字符，其他字符都可以匹配。比如，-xyz-表示除了x、y、z之外都可以匹配。" class="headerlink" title="如果方括号内的第一个字符是[^]，则表示除了字符类之中的字符，其他字符都可以匹配。比如，[^xyz]表示除了x、y、z之外都可以匹配。"></a>如果方括号内的第一个字符是[^]，则表示除了字符类之中的字符，其他字符都可以匹配。比如，[^xyz]表示除了x、y、z之外都可以匹配。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/[^abc]/.test(&apos;hello world&apos;) // true</div><div class="line">/[^abc]/.test(&apos;bbc&apos;) // false</div></pre></td></tr></table></figure>
+<h6 id="如果方括号内没有其他字符，即只有-，就表示匹配一切字符，其中包括换行符，而点号（-）是不包括换行符的。"><a href="#如果方括号内没有其他字符，即只有-，就表示匹配一切字符，其中包括换行符，而点号（-）是不包括换行符的。" class="headerlink" title="如果方括号内没有其他字符，即只有[^]，就表示匹配一切字符，其中包括换行符，而点号（.）是不包括换行符的。"></a>如果方括号内没有其他字符，即只有[^]，就表示匹配一切字符，其中包括换行符，而点号（.）是不包括换行符的。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var s = &apos;Please yes\nmake my day!&apos;;</div><div class="line"></div><div class="line">s.match(/yes.*day/) // null</div><div class="line">s.match(/yes[^]*day/) // [ &apos;yes\nmake my day&apos;]</div><div class="line">上面代码中，字符串s含有一个换行符，点号不包括换行符，所以第一个正则表达式匹配失败；第二个正则表达式[^]包含一切字符，所以匹配成功。</div></pre></td></tr></table></figure>
+<ol>
+<li>连字符（-）<h6 id="某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，-abc-可以写成-a-c-，-0123456789-可以写成-0-9-，同理-A-Z-表示26个大写字母。"><a href="#某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，-abc-可以写成-a-c-，-0123456789-可以写成-0-9-，同理-A-Z-表示26个大写字母。" class="headerlink" title="某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，[abc]可以写成[a-c]，[0123456789]可以写成[0-9]，同理[A-Z]表示26个大写字母。"></a>某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，[abc]可以写成[a-c]，[0123456789]可以写成[0-9]，同理[A-Z]表示26个大写字母。</h6></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/a-z/.test(&apos;b&apos;) // false</div><div class="line">/[a-z]/.test(&apos;b&apos;) // true</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[0-9.,]</div><div class="line">[0-9a-fA-F]</div><div class="line">[a-zA-Z0-9-]</div><div class="line">[1-31]</div></pre></td></tr></table></figure>
+<h6 id="上面代码中最后一个字符类-1-31-，不代表1到31，只代表1到3。"><a href="#上面代码中最后一个字符类-1-31-，不代表1到31，只代表1到3。" class="headerlink" title="上面代码中最后一个字符类[1-31]，不代表1到31，只代表1到3。"></a>上面代码中最后一个字符类[1-31]，不代表1到31，只代表1到3。</h6><h6 id="另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是-A-z-，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。"><a href="#另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是-A-z-，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。" class="headerlink" title="另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是[A-z]，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。"></a>另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是[A-z]，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/[A-z]/.test(&apos;\\&apos;) // true</div></pre></td></tr></table></figure>
+<h5 id="4-5-预定义模式"><a href="#4-5-预定义模式" class="headerlink" title="4.5 预定义模式"></a>4.5 预定义模式</h5><h6 id="预定义模式指的是某些常见模式的简写方式。"><a href="#预定义模式指的是某些常见模式的简写方式。" class="headerlink" title="预定义模式指的是某些常见模式的简写方式。"></a>预定义模式指的是某些常见模式的简写方式。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">\d 匹配0-9之间的任一数字，相当于[0-9]。</div><div class="line">\D 匹配所有0-9以外的字符，相当于[^0-9]。</div><div class="line">\w 匹配任意的字母、数字和下划线，相当于[A-Za-z0-9_]。</div><div class="line">\W 除所有字母、数字和下划线以外的字符，相当于[^A-Za-z0-9_]。</div><div class="line">\s 匹配空格（包括制表符、空格符、断行符等），相等于[\t\r\n\v\f]。</div><div class="line">\S 匹配非空格的字符，相当于[^\t\r\n\v\f]。</div><div class="line">\b 匹配词的边界。</div><div class="line">\B 匹配非词边界，即在词的内部。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// \s的例子</div><div class="line">/\s\w*/.exec(&apos;hello world&apos;) // [&quot; world&quot;]</div><div class="line"></div><div class="line">// \b的例子</div><div class="line">/\bworld/.test(&apos;hello world&apos;) // true</div><div class="line">/\bworld/.test(&apos;hello-world&apos;) // true</div><div class="line">/\bworld/.test(&apos;helloworld&apos;) // false</div><div class="line"></div><div class="line">// \B的例子</div><div class="line">/\Bworld/.test(&apos;hello-world&apos;) // false</div><div class="line">/\Bworld/.test(&apos;helloworld&apos;) // true</div></pre></td></tr></table></figure>
+<h6 id="通常，正则表达式遇到换行符（-n）就会停止匹配。"><a href="#通常，正则表达式遇到换行符（-n）就会停止匹配。" class="headerlink" title="通常，正则表达式遇到换行符（\n）就会停止匹配。"></a>通常，正则表达式遇到换行符（\n）就会停止匹配。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var html = &quot;&lt;b&gt;Hello&lt;/b&gt;\n&lt;i&gt;world!&lt;/i&gt;&quot;;</div><div class="line"></div><div class="line">/.*/.exec(html)[0]</div><div class="line">// &quot;&lt;b&gt;Hello&lt;/b&gt;&quot;</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，字符串html包含一个换行符，结果点字符（-）不匹配换行符，导致匹配结果可能不符合原意。这时使用-s字符类，就能包括换行符。"><a href="#上面代码中，字符串html包含一个换行符，结果点字符（-）不匹配换行符，导致匹配结果可能不符合原意。这时使用-s字符类，就能包括换行符。" class="headerlink" title="上面代码中，字符串html包含一个换行符，结果点字符（.）不匹配换行符，导致匹配结果可能不符合原意。这时使用\s字符类，就能包括换行符。"></a>上面代码中，字符串html包含一个换行符，结果点字符（.）不匹配换行符，导致匹配结果可能不符合原意。这时使用\s字符类，就能包括换行符。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var html = &quot;&lt;b&gt;Hello&lt;/b&gt;\n&lt;i&gt;world!&lt;/i&gt;&quot;;</div><div class="line"></div><div class="line">/[\S\s]*/.exec(html)[0]</div><div class="line">// &quot;&lt;b&gt;Hello&lt;/b&gt;\n&lt;i&gt;world!&lt;/i&gt;&quot;</div><div class="line"></div><div class="line">// 另一种写法（用到了非捕获组）</div><div class="line">/(?:.|\s)*/.exec(html)[0]</div><div class="line">// &quot;&lt;b&gt;Hello&lt;/b&gt;\n&lt;i&gt;world!&lt;/i&gt;&quot;</div></pre></td></tr></table></figure>
+<h6 id="上面代码中，-S-s-指代一切字符。"><a href="#上面代码中，-S-s-指代一切字符。" class="headerlink" title="上面代码中，[\S\s]指代一切字符。"></a>上面代码中，[\S\s]指代一切字符。</h6><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=1&height=32"></iframe>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/23/Yarn构建工具入门/" rel="next" title="Yarn构建工具入门">
+                <i class="fa fa-chevron-left"></i> Yarn构建工具入门
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/28/正则表达式笔记2/" rel="prev" title="正则表达式笔记2">
+                正则表达式笔记2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/28/正则表达式笔记1/"
+     data-title="正则表达式笔记1"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记1/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/28/正则表达式笔记1/"
+           data-title="正则表达式笔记1" data-url="http://www.wanzhuhao.cn/2017/02/28/正则表达式笔记1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="ShengNan" />
+          <p class="site-author-name" itemprop="name">ShengNan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js正则对象RegExp"><span class="nav-number">1.</span> <span class="nav-text">js正则对象RegExp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-js正则概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.js正则概述</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">新建正则表达式有两种方法。一种是使用字面量，以斜杠表示开始和结束。另一种是使用RegExp构造函数。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">上面两种写法是等价的，都新建了一个内容为xyz的正则表达式对象。它们的主要区别是，第一种方法在编译时新建正则表达式，第二种方法在运行时新建正则表达式。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则对象生成以后，有两种使用方式："><span class="nav-number">1.0.1.1.</span> <span class="nav-text">正则对象生成以后，有两种使用方式：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1正则对象的属性和方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.1正则对象的属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#正则对象的属性分成两类。"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">正则对象的属性分成两类。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-test"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.2 test()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">正则对象的test方法返回一个布尔值，表示当前模式是否能匹配参数字符串。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。"><span class="nav-number">1.0.3.1.1.</span> <span class="nav-text">如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。"><span class="nav-number">1.0.3.1.2.</span> <span class="nav-text">带有g修饰符时，可以通过正则对象的lastIndex属性指定开始搜索的位置。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-exec"><span class="nav-number">1.0.4.</span> <span class="nav-text">2.3 exec()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。"><span class="nav-number">1.0.4.1.1.</span> <span class="nav-text">如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#exec方法的返回数组还包含以下两个属性："><span class="nav-number">1.0.4.1.2.</span> <span class="nav-text">exec方法的返回数组还包含以下两个属性：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。"><span class="nav-number">1.0.4.1.3.</span> <span class="nav-text">如果正则表达式加上g修饰符，则可以使用多次exec方法，下一次搜索的位置从上一次匹配成功结束的位置开始。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。"><span class="nav-number">1.0.4.1.4.</span> <span class="nav-text">上面代码连续用了四次exec方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，正则对象的lastIndex属性重置为0，意味着第四次匹配将从头开始。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">利用g修饰符允许多次匹配的特点，可以用一个循环完成全部匹配。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-字符串对象的方法"><span class="nav-number">1.0.5.</span> <span class="nav-text">3.字符串对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串对象的方法之中，有4种与正则对象有关"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">字符串对象的方法之中，有4种与正则对象有关.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-String-prototype-match"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">3.1 String.prototype.match()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串对象的match方法对字符串进行正则匹配，返回匹配结果。"><span class="nav-number">1.0.5.2.1.</span> <span class="nav-text">字符串对象的match方法对字符串进行正则匹配，返回匹配结果。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。"><span class="nav-number">1.0.5.2.2.</span> <span class="nav-text">如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。"><span class="nav-number">1.0.5.2.3.</span> <span class="nav-text">设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-String-prototype-search"><span class="nav-number">1.0.5.3.</span> <span class="nav-text">3.2 String.prototype.search()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。"><span class="nav-number">1.0.5.3.1.</span> <span class="nav-text">字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#该方法会忽略g修饰符。"><span class="nav-number">1.0.5.3.2.</span> <span class="nav-text">该方法会忽略g修饰符。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-String-prototype-replace"><span class="nav-number">1.0.5.4.</span> <span class="nav-text">3.3 String.prototype.replace()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。"><span class="nav-number">1.0.5.4.1.</span> <span class="nav-text">字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值"><span class="nav-number">1.0.5.4.2.</span> <span class="nav-text">搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值.</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#replace方法的一个应用，就是消除字符串首尾两端的空格。"><span class="nav-number">1.0.5.4.3.</span> <span class="nav-text">replace方法的一个应用，就是消除字符串首尾两端的空格。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#replace方法的第二个参数可以使用美元符号-，用来指代所替换的内容。"><span class="nav-number">1.0.5.4.4.</span> <span class="nav-text">replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。"><span class="nav-number">1.0.5.4.5.</span> <span class="nav-text">replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。"><span class="nav-number">1.0.5.4.6.</span> <span class="nav-text">作为replace方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#估计目前主流的那些mvvm框架都是用此方式实现的"><span class="nav-number">1.0.5.4.7.</span> <span class="nav-text">估计目前主流的那些mvvm框架都是用此方式实现的</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-String-prototype-split"><span class="nav-number">1.0.5.5.</span> <span class="nav-text">3.4 String.prototype.split()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。"><span class="nav-number">1.0.5.5.1.</span> <span class="nav-text">字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。"><span class="nav-number">1.0.5.5.2.</span> <span class="nav-text">该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码使用正则表达式，去除了子字符串的逗号后面的空格。"><span class="nav-number">1.0.5.5.3.</span> <span class="nav-text">上面代码使用正则表达式，去除了子字符串的逗号后面的空格。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。"><span class="nav-number">1.0.5.5.4.</span> <span class="nav-text">上面代码的分割规则是0次或多次的a，由于正则默认是贪婪匹配，所以例一的第一个分隔符是aaa，第二个分割符是a，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是aaa，第二个分隔符是0个a（即空字符），第三个分隔符是a，所以将字符串分成四个部分。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-匹配规则"><span class="nav-number">1.0.6.</span> <span class="nav-text">4.匹配规则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-字面量字符和元字符"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">4.1 字面量字符和元字符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#大部分字符在正则表达式中，就是字面的含义，比如-a-匹配a，-b-匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal-characters）。"><span class="nav-number">1.0.6.1.1.</span> <span class="nav-text">大部分字符在正则表达式中，就是字面的含义，比如/a/匹配a，/b/匹配b。如果在正则表达式之中，某个字符只表示它字面的含义（就像前面的a和b），那么它们就叫做“字面量字符”（literal characters）。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。"><span class="nav-number">1.0.6.1.2.</span> <span class="nav-text">除了字面量字符以外，还有一部分字符有特殊含义，不代表字面的意思。它们叫做“元字符”（metacharacters），主要有以下几个。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#点字符（-）匹配除回车（-r）、换行-n-、行分隔符（-u2028）和段分隔符（-u2029）以外的所有字符。"><span class="nav-number">1.0.6.1.3.</span> <span class="nav-text">点字符（.）匹配除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，c-t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。"><span class="nav-number">1.0.6.1.4.</span> <span class="nav-text">上面代码中，c.t匹配c和t之间包含任意一个字符的情况，只要这三个字符在同一行，比如cat、c2t、c-t等等，但是不匹配coot。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#位置字符用来提示字符所处的位置，主要有两个字符。1-表示字符串的开始位置。2-表示字符串的结束位置"><span class="nav-number">1.0.6.1.5.</span> <span class="nav-text">位置字符用来提示字符所处的位置，主要有两个字符。1. ^ 表示字符串的开始位置。2.$ 表示字符串的结束位置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#竖线符号（-）在正则表达式中表示“或关系”（OR），即cat-dog表示匹配cat或dog。"><span class="nav-number">1.0.6.1.6.</span> <span class="nav-text">竖线符号（|）在正则表达式中表示“或关系”（OR），即cat|dog表示匹配cat或dog。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#其他的元字符还包括-、-、-、-、-、-、-等，将在下文解释。"><span class="nav-number">1.0.6.1.7.</span> <span class="nav-text">其他的元字符还包括\、*、+、?、()、[]、{}等，将在下文解释。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-转义符"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">4.2 转义符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成-。"><span class="nav-number">1.0.6.2.1.</span> <span class="nav-text">正则表达式中那些有特殊含义的字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配加号，就要写成+。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#正则模式中，需要用斜杠转义的，一共有12个字符：-、-、-、-、-、-、-、-、-、-、-和-。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。"><span class="nav-number">1.0.6.2.2.</span> <span class="nav-text">正则模式中，需要用斜杠转义的，一共有12个字符：^、.、[、$、(、)、|、*、+、?、{和\。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-正则表达式对一些不能打印的特殊字符，提供了表达方法。"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">4.3 正则表达式对一些不能打印的特殊字符，提供了表达方法。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-字符类"><span class="nav-number">1.0.6.4.</span> <span class="nav-text">4.4 字符类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如-xyz-表示x、y、z之中任选一个匹配。"><span class="nav-number">1.0.6.4.1.</span> <span class="nav-text">字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如[xyz] 表示x、y、z之中任选一个匹配。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#有两个字符在字符类中有特殊含义。"><span class="nav-number">1.0.6.4.2.</span> <span class="nav-text">有两个字符在字符类中有特殊含义。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果方括号内的第一个字符是-，则表示除了字符类之中的字符，其他字符都可以匹配。比如，-xyz-表示除了x、y、z之外都可以匹配。"><span class="nav-number">1.0.6.4.3.</span> <span class="nav-text">如果方括号内的第一个字符是[^]，则表示除了字符类之中的字符，其他字符都可以匹配。比如，[^xyz]表示除了x、y、z之外都可以匹配。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果方括号内没有其他字符，即只有-，就表示匹配一切字符，其中包括换行符，而点号（-）是不包括换行符的。"><span class="nav-number">1.0.6.4.4.</span> <span class="nav-text">如果方括号内没有其他字符，即只有[^]，就表示匹配一切字符，其中包括换行符，而点号（.）是不包括换行符的。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，-abc-可以写成-a-c-，-0123456789-可以写成-0-9-，同理-A-Z-表示26个大写字母。"><span class="nav-number">1.0.6.4.5.</span> <span class="nav-text">某些情况下，对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如，[abc]可以写成[a-c]，[0123456789]可以写成[0-9]，同理[A-Z]表示26个大写字母。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中最后一个字符类-1-31-，不代表1到31，只代表1到3。"><span class="nav-number">1.0.6.4.6.</span> <span class="nav-text">上面代码中最后一个字符类[1-31]，不代表1到31，只代表1到3。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是-A-z-，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。"><span class="nav-number">1.0.6.4.7.</span> <span class="nav-text">另外，不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是[A-z]，表面上它是选中从大写的A到小写的z之间52个字母，但是由于在ASCII编码之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-预定义模式"><span class="nav-number">1.0.6.5.</span> <span class="nav-text">4.5 预定义模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#预定义模式指的是某些常见模式的简写方式。"><span class="nav-number">1.0.6.5.1.</span> <span class="nav-text">预定义模式指的是某些常见模式的简写方式。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#通常，正则表达式遇到换行符（-n）就会停止匹配。"><span class="nav-number">1.0.6.5.2.</span> <span class="nav-text">通常，正则表达式遇到换行符（\n）就会停止匹配。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，字符串html包含一个换行符，结果点字符（-）不匹配换行符，导致匹配结果可能不符合原意。这时使用-s字符类，就能包括换行符。"><span class="nav-number">1.0.6.5.3.</span> <span class="nav-text">上面代码中，字符串html包含一个换行符，结果点字符（.）不匹配换行符，导致匹配结果可能不符合原意。这时使用\s字符类，就能包括换行符。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#上面代码中，-S-s-指代一切字符。"><span class="nav-number">1.0.6.5.4.</span> <span class="nav-text">上面代码中，[\S\s]指代一切字符。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengNan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
