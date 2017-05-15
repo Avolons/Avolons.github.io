@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="videojs," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="使用videojs-resolution-switcher插件为视屏添加清晰度切换插件地址使用说明1.引用js和css文件
+12&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;../../lib/videojs-resolution-switcher.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;../../lib/videojs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="videojs入门指南3——清晰度切换">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南3——清晰度切换/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="使用videojs-resolution-switcher插件为视屏添加清晰度切换插件地址使用说明1.引用js和css文件
+12&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;../../lib/videojs-resolution-switcher.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;../../lib/videojs">
+<meta property="og:updated_time" content="2017-05-15T14:39:00.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="videojs入门指南3——清晰度切换">
+<meta name="twitter:description" content="使用videojs-resolution-switcher插件为视屏添加清晰度切换插件地址使用说明1.引用js和css文件
+12&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;../../lib/videojs-resolution-switcher.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;../../lib/videojs">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南3——清晰度切换/"/>
+
+  <title> videojs入门指南3——清晰度切换 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                videojs入门指南3——清晰度切换
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-15T22:38:00+08:00" content="2017-05-15">
+              2017-05-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/plugin/" itemprop="url" rel="index">
+                    <span itemprop="name">plugin</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/15/videojs入门指南3——清晰度切换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/15/videojs入门指南3——清晰度切换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="使用videojs-resolution-switcher插件为视屏添加清晰度切换"><a href="#使用videojs-resolution-switcher插件为视屏添加清晰度切换" class="headerlink" title="使用videojs-resolution-switcher插件为视屏添加清晰度切换"></a>使用videojs-resolution-switcher插件为视屏添加清晰度切换</h3><h4 id="插件地址"><a href="#插件地址" class="headerlink" title="插件地址"></a><a href="https://github.com/kmoskwiak/videojs-resolution-switcher" target="_blank" rel="external">插件地址</a></h4><h4 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h4><p>1.引用js和css文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;../../lib/videojs-resolution-switcher.css&quot;&gt;</div><div class="line">&lt;script src=&quot;../../lib/videojs-resolution-switcher.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>2.初始化项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">videojs(&apos;my-video&apos;, &#123;</div><div class="line">            controls: true,</div><div class="line">            plugins: &#123;</div><div class="line">                videoJsResolutionSwitcher: &#123;</div><div class="line">                    default: &apos;low&apos;,</div><div class="line">                    dynamicLabel: true</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;, function() &#123;</div><div class="line">            var player = this;</div><div class="line">            window.player = player;</div><div class="line">            /*此处放置视屏数据，格式为数组，下面有被注释的示例*/</div><div class="line">            player.updateSrc(</div><div class="line">                [&#123;</div><div class="line">                        src: &apos;../video/example.m4v&apos;,</div><div class="line">                        type: &apos;video/mp4&apos;,</div><div class="line">                        label: &apos;标清&apos;,</div><div class="line">                        res: 360</div><div class="line">                    &#125;, &#123;</div><div class="line">                        src: &apos;../video/example.m4v&apos;,</div><div class="line">                        type: &apos;video/mp4&apos;,</div><div class="line">                        label: &apos;高清&apos;,</div><div class="line">                        res: 720</div><div class="line">                    &#125;,</div><div class="line">                    &#123;</div><div class="line">                        src: &apos;../video/example.m4v&apos;,</div><div class="line">                        type: &apos;video/mp4&apos;,</div><div class="line">                        label: &apos;超清&apos;,</div><div class="line">                        res: 1080</div><div class="line">                    &#125;</div><div class="line">                ]</div><div class="line">            );</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
+<h4 id="配置参数和方法说明"><a href="#配置参数和方法说明" class="headerlink" title="配置参数和方法说明"></a>配置参数和方法说明</h4><h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><ol>
+<li>default://默认分辨率 使用”low”或者”high” 系统会自动选择最低或者最高的分辨率，也可以手动指定分辨率，使用res属性作为参数，例如在当前例子中，我设置‘default：360’，则分辨率默认为标清。</li>
+<li>dynamicLabel://是否显示分辨率图标，默认显示，设置为false则不显示。</li>
+<li>customSourcePicker://自定义函数，筛选当前所有资源。</li>
+<li>ui：//完全不知道有啥用，api上说的是设置为false则按钮不显示，但是我并没有找到是哪个按钮。所以这个属性不用管。</li>
+</ol>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ol>
+<li>updateSrc([source])：和videojs的src(),方法类似，用于载入资源。</li>
+<li>currentResolution([label], [customSourcePicker])：返回指定的视频和清晰度。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 返回当前资源</div><div class="line">player.currentResolution(); // returns object &#123;label &apos;&apos;, sources: []&#125;</div><div class="line"></div><div class="line">// 设置资源</div><div class="line">player.currentResolution(&apos;高清&apos;); // returns videojs player object</div></pre></td></tr></table></figure>
+<p>该方法接受两个参数，</p>
+<ol>
+<li>label：//清晰度</li>
+<li>customSourcePicker：//自定义筛选函数，用于当资源不止一个时，进行资源筛选。和vjs-playlist插件配合使用时可能有用。该插件有三个参数。<ol>
+<li>player</li>
+<li>sources</li>
+<li>label</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">player.currentResolution(&apos;SD&apos;, function(_player, _sources, _label)&#123;</div><div class="line">  return _player.src(_sources[0]); \\ Always select first source in array</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>getGroupedSrc()://按照资源类型，分辨率，清晰度返回资源分组。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/videojs/" rel="tag">#videojs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/15/videojs入门指南2——热键插件/" rel="next" title="videojs入门指南2——热键插件">
+                <i class="fa fa-chevron-left"></i> videojs入门指南2——热键插件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/15/videojs入门指南4——清晰度切换/" rel="prev" title="videojs入门指南4——m3u8格式">
+                videojs入门指南4——m3u8格式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/05/15/videojs入门指南3——清晰度切换/"
+     data-title="videojs入门指南3——清晰度切换"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南3——清晰度切换/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/15/videojs入门指南3——清晰度切换/"
+           data-title="videojs入门指南3——清晰度切换" data-url="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南3——清晰度切换/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="ShengNan" />
+          <p class="site-author-name" itemprop="name">ShengNan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用videojs-resolution-switcher插件为视屏添加清晰度切换"><span class="nav-number">1.</span> <span class="nav-text">使用videojs-resolution-switcher插件为视屏添加清晰度切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件地址"><span class="nav-number">1.1.</span> <span class="nav-text">插件地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用说明"><span class="nav-number">1.2.</span> <span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置参数和方法说明"><span class="nav-number">1.3.</span> <span class="nav-text">配置参数和方法说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengNan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

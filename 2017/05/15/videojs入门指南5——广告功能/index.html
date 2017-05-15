@@ -1,0 +1,767 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="videojs," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="使用videojs-contrib-ads插件为视屏添加广告功能插件地址使用方式videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="videojs入门指南5——广告功能">
+<meta property="og:url" content="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南5——广告功能/index.html">
+<meta property="og:site_name" content="EXCALIBUR">
+<meta property="og:description" content="使用videojs-contrib-ads插件为视屏添加广告功能插件地址使用方式videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法">
+<meta property="og:updated_time" content="2017-05-15T14:40:59.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="videojs入门指南5——广告功能">
+<meta name="twitter:description" content="使用videojs-contrib-ads插件为视屏添加广告功能插件地址使用方式videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南5——广告功能/"/>
+
+  <title> videojs入门指南5——广告功能 | EXCALIBUR </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6b76e9bfbd7a965d2ad9ed314a9ebe1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EXCALIBUR</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">In Arthurian legend, the sword belonging to King Arthur.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QvwLzan7Uz5xPEAmtKy5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                videojs入门指南5——广告功能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-15T22:40:00+08:00" content="2017-05-15">
+              2017-05-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/plugin/" itemprop="url" rel="index">
+                    <span itemprop="name">plugin</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/15/videojs入门指南5——广告功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/15/videojs入门指南5——广告功能/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="使用videojs-contrib-ads插件为视屏添加广告功能"><a href="#使用videojs-contrib-ads插件为视屏添加广告功能" class="headerlink" title="使用videojs-contrib-ads插件为视屏添加广告功能"></a>使用videojs-contrib-ads插件为视屏添加广告功能</h3><h4 id="插件地址"><a href="#插件地址" class="headerlink" title="插件地址"></a><a href="https://github.com/videojs/videojs-contrib-ads" target="_blank" rel="external">插件地址</a></h4><h4 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h4><h5 id="videojs-contrib-ads插件是一个提供了常用video-js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。"><a href="#videojs-contrib-ads插件是一个提供了常用video-js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。" class="headerlink" title="videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。"></a>videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。</h5><h5 id="一旦您调用player-ads-初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）"><a href="#一旦您调用player-ads-初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）" class="headerlink" title="一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）"></a>一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）</h5><h5 id="以下是从广告插件向您整合信息的事件："><a href="#以下是从广告插件向您整合信息的事件：" class="headerlink" title="以下是从广告插件向您整合信息的事件："></a>以下是从广告插件向您整合信息的事件：</h5><h6 id="1-contentupdate（EVENT）-当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源"><a href="#1-contentupdate（EVENT）-当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源" class="headerlink" title="1. contentupdate（EVENT） - 当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源"></a>1. contentupdate（EVENT） - 当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源</h6><h6 id="2-readyforpreroll-（EVENT）-内容视频第一次播放时触发，所以可以在此触发广告资源。"><a href="#2-readyforpreroll-（EVENT）-内容视频第一次播放时触发，所以可以在此触发广告资源。" class="headerlink" title="2. readyforpreroll （EVENT） - 内容视频第一次播放时触发，所以可以在此触发广告资源。"></a>2. readyforpreroll （EVENT） - 内容视频第一次播放时触发，所以可以在此触发广告资源。</h6><h5 id="以下是用于向广告插件发送信息的交互点："><a href="#以下是用于向广告插件发送信息的交互点：" class="headerlink" title="以下是用于向广告插件发送信息的交互点："></a>以下是用于向广告插件发送信息的交互点：</h5><h6 id="1-adsready-（EVENT）-触发此事件，表示您的集成已准备好播放广告。"><a href="#1-adsready-（EVENT）-触发此事件，表示您的集成已准备好播放广告。" class="headerlink" title="1. adsready （EVENT） - 触发此事件，表示您的集成已准备好播放广告。"></a>1. adsready （EVENT） - 触发此事件，表示您的集成已准备好播放广告。</h6><h6 id="2-adplaying（EVENT）-在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。"><a href="#2-adplaying（EVENT）-在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。" class="headerlink" title="2. adplaying（EVENT） - 在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。"></a>2. adplaying（EVENT） - 在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。</h6><h6 id="3-adscanceled（EVENT）-在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的-如果您打算展示广告，则无需担心触发它。"><a href="#3-adscanceled（EVENT）-在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的-如果您打算展示广告，则无需担心触发它。" class="headerlink" title="3. adscanceled（EVENT） - 在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的; 如果您打算展示广告，则无需担心触发它。"></a>3. adscanceled（EVENT） - 在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的; 如果您打算展示广告，则无需担心触发它。</h6><h6 id="4-adserror-（EVENT）-触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。"><a href="#4-adserror-（EVENT）-触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。" class="headerlink" title="4. adserror （EVENT） - 触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。"></a>4. adserror （EVENT） - 触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。</h6><h6 id="5-nopreroll（EVENT）-触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。"><a href="#5-nopreroll（EVENT）-触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。" class="headerlink" title="5. nopreroll（EVENT） - 触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。"></a>5. nopreroll（EVENT） - 触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。</h6><h6 id="6-nopostroll（EVENT）-触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。"><a href="#6-nopostroll（EVENT）-触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。" class="headerlink" title="6. nopostroll（EVENT） - 触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。"></a>6. nopostroll（EVENT） - 触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。</h6><h6 id="7-ads-ad-started-（EVENT）-每个广告开始时触发。"><a href="#7-ads-ad-started-（EVENT）-每个广告开始时触发。" class="headerlink" title="7. ads-ad-started （EVENT） - 每个广告开始时触发。"></a>7. ads-ad-started （EVENT） - 每个广告开始时触发。</h6><h6 id="8-contentresumed（EVENT）-如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。"><a href="#8-contentresumed（EVENT）-如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。" class="headerlink" title="8. contentresumed（EVENT） - 如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。"></a>8. contentresumed（EVENT） - 如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。</h6><h6 id="9-ads-startLinearAdMode-（方法）-调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。"><a href="#9-ads-startLinearAdMode-（方法）-调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。" class="headerlink" title="9. ads.startLinearAdMode()（方法） - 调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。"></a>9. ads.startLinearAdMode()（方法） - 调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。</h6><h6 id="10-ads-endLinearAdMode-（方法）-调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。"><a href="#10-ads-endLinearAdMode-（方法）-调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。" class="headerlink" title="10. ads.endLinearAdMode()（方法） - 调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。"></a>10. ads.endLinearAdMode()（方法） - 调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。</h6><h6 id="11-ads-skipLinearAdMode-（方法）-调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。"><a href="#11-ads-skipLinearAdMode-（方法）-调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。" class="headerlink" title="11. ads.skipLinearAdMode()（方法） - 调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。"></a>11. ads.skipLinearAdMode()（方法） - 调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。</h6><h6 id="12-ads-stitchedAds-（方法）-获取或设置stitchedAds设置。"><a href="#12-ads-stitchedAds-（方法）-获取或设置stitchedAds设置。" class="headerlink" title="12. ads.stitchedAds()（方法） - 获取或设置stitchedAds设置。"></a>12. ads.stitchedAds()（方法） - 获取或设置stitchedAds设置。</h6><h6 id="13-ads-videoElementRecycled-（方法）-如果content元素中发生广告回放，则返回true。"><a href="#13-ads-videoElementRecycled-（方法）-如果content元素中发生广告回放，则返回true。" class="headerlink" title="13. ads.videoElementRecycled() （方法） - 如果content元素中发生广告回放，则返回true。"></a>13. ads.videoElementRecycled() （方法） - 如果content元素中发生广告回放，则返回true。</h6><h5 id="您的集成可能需要包括的其他事件和属性"><a href="#您的集成可能需要包括的其他事件和属性" class="headerlink" title="您的集成可能需要包括的其他事件和属性"></a>您的集成可能需要包括的其他事件和属性</h5><h5 id="这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。"><a href="#这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。" class="headerlink" title="这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。"></a>这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。</h5><h5 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">ads-request：请求广告数据时触发。</div><div class="line"></div><div class="line">ads-load：广告请求后可以使用广告数据时触发。</div><div class="line"></div><div class="line">ads-pod-started：当LINEAR广告窗格启动时触发。</div><div class="line"></div><div class="line">ads-pod-ended：LINEAR广告荚已完成时触发。</div><div class="line"></div><div class="line">ads-allpods-completed：所有LINEAR广告完成后触发。</div><div class="line"></div><div class="line">ads-ad-started：广告开始播放时触发。</div><div class="line"></div><div class="line">ads-ad-ended：广告完成播放时触发。</div><div class="line"></div><div class="line">ads-first-quartile：当广告播放头穿过第一个四分位数时触发。</div><div class="line"></div><div class="line">ads-midpoint：当广告播放头穿过中点时触发。</div><div class="line"></div><div class="line">ads-third-quartile当广告播放头穿过第三个四分位数时被触发。</div><div class="line"></div><div class="line">ads-pause：广告暂停时触发。</div><div class="line"></div><div class="line">ads-play：广告恢复后触发。</div><div class="line"></div><div class="line">ads-mute：当广告音量已被静音时触发。</div><div class="line"></div><div class="line">ads-click：点击广告时触发。</div></pre></td></tr></table></figure>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">player.ads.provider = &#123;</div><div class="line">  &quot;type&quot;: `String`,</div><div class="line">  &quot;event&quot;: `Object`</div><div class="line">&#125;</div><div class="line"></div><div class="line">player.ads.ad = &#123;</div><div class="line">  &quot;type&quot;: `String`,</div><div class="line">  &quot;index&quot;: `Number`,</div><div class="line">  &quot;id&quot;: `String`,</div><div class="line">  &quot;duration&quot;: `Number`,</div><div class="line">  &quot;currentTime&quot;: `Function`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="宏（个人感觉作用不大，还不太好用）"><a href="#宏（个人感觉作用不大，还不太好用）" class="headerlink" title="宏（个人感觉作用不大，还不太好用）"></a>宏（个人感觉作用不大，还不太好用）</h5><h6 id="广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。"><a href="#广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。" class="headerlink" title="广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。"></a>广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。</h6><h5 id="例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址："><a href="#例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址：" class="headerlink" title="例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址："></a>例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;http://example.com/vmap.xml?id=&#123;player.id&#125;&apos;</div></pre></td></tr></table></figure>
+<h6 id="在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示："><a href="#在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示：" class="headerlink" title="在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示："></a>在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serverUrl = player.ads.adMacroReplacement(serverUrl, true, additionalMacros);</div></pre></td></tr></table></figure>
+<h6 id="这将导致如下所示的服务器URL："><a href="#这将导致如下所示的服务器URL：" class="headerlink" title="这将导致如下所示的服务器URL："></a>这将导致如下所示的服务器URL：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;http://example.com/vmap.xml?id=12345&apos;</div></pre></td></tr></table></figure>
+<h6 id="其中12345是播放器ID。"><a href="#其中12345是播放器ID。" class="headerlink" title="其中12345是播放器ID。"></a>其中12345是播放器ID。</h6><h6 id="adMacroReplacement需要3个参数："><a href="#adMacroReplacement需要3个参数：" class="headerlink" title="adMacroReplacement需要3个参数："></a>adMacroReplacement需要3个参数：</h6><ol>
+<li>具有要替换的宏的字符串。</li>
+<li>true如果宏值在插入时应该是URI编码的，否则false（默认false）</li>
+<li>定义其他宏的可选对象，如{‘{five}’: 5}（默认{}）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{player.id}</td>
+<td>The player ID</td>
+</tr>
+<tr>
+<td>{player.duration}</td>
+<td>The duration of current video*</td>
+</tr>
+<tr>
+<td>{timestamp}</td>
+<td>Current epoch time</td>
+</tr>
+<tr>
+<td>{document.referrer}</td>
+<td>Value of document.referrer</td>
+</tr>
+<tr>
+<td>{window.location.href}</td>
+<td>Value of window.location.href</td>
+</tr>
+<tr>
+<td>{random}</td>
+<td>A random number 0-1 trillion</td>
+</tr>
+<tr>
+<td>{mediainfo.id}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.name}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.description}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.tags}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.reference_id}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.duration}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+<tr>
+<td>{mediainfo.ad_keys}</td>
+<td>Pulled from mediainfo object</td>
+</tr>
+</tbody>
+</table>
+<h6 id="再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多"><a href="#再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多" class="headerlink" title="再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多"></a>再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多</h6>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/videojs/" rel="tag">#videojs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/15/videojs入门指南4——清晰度切换/" rel="next" title="videojs入门指南4——m3u8格式">
+                <i class="fa fa-chevron-left"></i> videojs入门指南4——m3u8格式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/15/videojs入门指南6——添加水印/" rel="prev" title="videojs入门指南6——添加水印">
+                videojs入门指南6——添加水印 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/05/15/videojs入门指南5——广告功能/"
+     data-title="videojs入门指南5——广告功能"
+     data-content=""
+     data-url="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南5——广告功能/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/15/videojs入门指南5——广告功能/"
+           data-title="videojs入门指南5——广告功能" data-url="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南5——广告功能/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="ShengNan" />
+          <p class="site-author-name" itemprop="name">ShengNan</p>
+          <p class="site-description motion-element" itemprop="description">东京食尸鬼啥时候出续集啊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用videojs-contrib-ads插件为视屏添加广告功能"><span class="nav-number">1.</span> <span class="nav-text">使用videojs-contrib-ads插件为视屏添加广告功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件地址"><span class="nav-number">1.1.</span> <span class="nav-text">插件地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方式"><span class="nav-number">1.2.</span> <span class="nav-text">使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#videojs-contrib-ads插件是一个提供了常用video-js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。"><span class="nav-number">1.2.1.</span> <span class="nav-text">videojs-contrib-ads插件是一个提供了常用video.js视频广告所需要功能的库。用于减少代码的集成。这个插件看着比较复杂，其实我们完全可以按照自己的想法来实现广告功能，我个人认为最简单的方式就是在视屏上覆盖一层广告层。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一旦您调用player-ads-初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）"><span class="nav-number">1.2.2.</span> <span class="nav-text">一旦您调用player.ads()初始化插件，它提供了六个交互点（四个事件和两个方法），您可以在集成中使用它们。（ps：这是按照官方的文档翻译的，我到现在都没明白蛰四个事件和两个方法是怎么来的，明明一堆的事件）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#以下是从广告插件向您整合信息的事件："><span class="nav-number">1.2.3.</span> <span class="nav-text">以下是从广告插件向您整合信息的事件：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-contentupdate（EVENT）-当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1. contentupdate（EVENT） - 当新内容视频已分配给播放器时触发，意思就是当前player对象的currentsrc改变时该事件会被触发，这意味着在播放新视频时可以通过该事件获取新的广告资源</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-readyforpreroll-（EVENT）-内容视频第一次播放时触发，所以可以在此触发广告资源。"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2. readyforpreroll （EVENT） - 内容视频第一次播放时触发，所以可以在此触发广告资源。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#以下是用于向广告插件发送信息的交互点："><span class="nav-number">1.2.4.</span> <span class="nav-text">以下是用于向广告插件发送信息的交互点：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-adsready-（EVENT）-触发此事件，表示您的集成已准备好播放广告。"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">1. adsready （EVENT） - 触发此事件，表示您的集成已准备好播放广告。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-adplaying（EVENT）-在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2. adplaying（EVENT） - 在广告开始播放时触发此事件。如果您的整合playing在广告开始时触发事件，则会自动重新分配adplaying。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-adscanceled（EVENT）-在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的-如果您打算展示广告，则无需担心触发它。"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">3. adscanceled（EVENT） - 在启动播放器或设置新视频以完全跳过广告后触发此事件。此事件是可选的; 如果您打算展示广告，则无需担心触发它。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-adserror-（EVENT）-触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">4. adserror （EVENT） - 触发此事件，表示广告整合中出现错误，任何广告状态都会中止，以便内容恢复。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-nopreroll（EVENT）-触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">5. nopreroll（EVENT） - 触发此事件，表示将不会有预卷广告。否则播放器将等待直到发生超时才能播放内容。此事件是可选的，但可以改善用户体验。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-nopostroll（EVENT）-触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。"><span class="nav-number">1.2.4.6.</span> <span class="nav-text">6. nopostroll（EVENT） - 触发此事件表示将不会有任何后期广告。否则，如果没有后期刊物，则内容会在内容结束后触发广告事件。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7-ads-ad-started-（EVENT）-每个广告开始时触发。"><span class="nav-number">1.2.4.7.</span> <span class="nav-text">7. ads-ad-started （EVENT） - 每个广告开始时触发。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-contentresumed（EVENT）-如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。"><span class="nav-number">1.2.4.8.</span> <span class="nav-text">8. contentresumed（EVENT） - 如果您的整合在广告后恢复内容时不会导致“播放”事件，请发送此事件以表明该内容可以恢复。这是添加到支持缝合广告，通常不是必需的。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-ads-startLinearAdMode-（方法）-调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。"><span class="nav-number">1.2.4.9.</span> <span class="nav-text">9. ads.startLinearAdMode()（方法） - 调用此方法来表明您的集成即将播放线性广告。该方法触发adstart由播放器发出。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#10-ads-endLinearAdMode-（方法）-调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。"><span class="nav-number">1.2.4.10.</span> <span class="nav-text">10. ads.endLinearAdMode()（方法） - 调用此方法来表示您的集成完成播放线性广告，准备恢复内容视频。该方法触发adend由播放器发出。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#11-ads-skipLinearAdMode-（方法）-调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。"><span class="nav-number">1.2.4.11.</span> <span class="nav-text">11. ads.skipLinearAdMode()（方法） - 调用此方法来表示您的集成已收到广告响应，但不会播放线性广告。该方法触发adskip由播放器发出。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#12-ads-stitchedAds-（方法）-获取或设置stitchedAds设置。"><span class="nav-number">1.2.4.12.</span> <span class="nav-text">12. ads.stitchedAds()（方法） - 获取或设置stitchedAds设置。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#13-ads-videoElementRecycled-（方法）-如果content元素中发生广告回放，则返回true。"><span class="nav-number">1.2.4.13.</span> <span class="nav-text">13. ads.videoElementRecycled() （方法） - 如果content元素中发生广告回放，则返回true。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#您的集成可能需要包括的其他事件和属性"><span class="nav-number">1.2.5.</span> <span class="nav-text">您的集成可能需要包括的其他事件和属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。"><span class="nav-number">1.2.6.</span> <span class="nav-text">这个项目不会发送这些事件，但是这些事件是一些惯例，使用一些您可能想要考虑发送一致性的集成。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#活动"><span class="nav-number">1.2.7.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性"><span class="nav-number">1.2.8.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#宏（个人感觉作用不大，还不太好用）"><span class="nav-number">1.2.9.</span> <span class="nav-text">宏（个人感觉作用不大，还不太好用）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">广告库的可选功能——广告宏。广告集成通常会使用广告宏，支将运行时将值添加到服务器URL或配置中。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址："><span class="nav-number">1.2.10.</span> <span class="nav-text">例如，支持此功能的广告集成可能会接受如下所示的广告服务器网址：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示："><span class="nav-number">1.2.10.1.</span> <span class="nav-text">在广告集成中，它将使用videojs-contrib-ads宏功能来处理该网址，如下所示：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#这将导致如下所示的服务器URL："><span class="nav-number">1.2.10.2.</span> <span class="nav-text">这将导致如下所示的服务器URL：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#其中12345是播放器ID。"><span class="nav-number">1.2.10.3.</span> <span class="nav-text">其中12345是播放器ID。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#adMacroReplacement需要3个参数："><span class="nav-number">1.2.10.4.</span> <span class="nav-text">adMacroReplacement需要3个参数：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多"><span class="nav-number">1.2.10.5.</span> <span class="nav-text">再往下的内容如果有兴趣的可以自己看，太多了，而且总感觉这个插件的好多功能用途不广。示例中展示了一个简单的广告集成例子，实际上的肯定会复杂的多</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengNan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wanzhuhao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
