@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  初始化插件  1234567videojs(&amp;apos;vidId&amp;ap">
+<meta name="description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;">
 <meta name="keywords" content="videojs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="videojs入门指南2——热键插件">
 <meta property="og:url" content="http://www.wanzhuhao.cn/2017/05/15/videojs入门指南2——热键插件/index.html">
 <meta property="og:site_name" content="EXCALIBUR">
-<meta property="og:description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  初始化插件  1234567videojs(&amp;apos;vidId&amp;ap">
-<meta property="og:updated_time" content="2017-05-15T14:38:07.670Z">
+<meta property="og:description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;">
+<meta property="og:updated_time" content="2017-06-21T18:24:12.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="videojs入门指南2——热键插件">
-<meta name="twitter:description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  初始化插件  1234567videojs(&amp;apos;vidId&amp;ap">
+<meta name="twitter:description" content="使用videojs-hotkeys 插件为videoJS视屏添加热键功能插件地址个人觉得还挺有用的一个插件，添加了键盘和视屏的交互，可以深度定制。很人性化使用方式 引入插件  1&amp;lt;script src=&amp;quot;/path/to/videojs.hotkeys.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;">
 
 
 
@@ -367,6 +367,7 @@
 <li>引入插件</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;/path/to/videojs.hotkeys.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <ol>
 <li>初始化插件</li>
 </ol>
@@ -396,7 +397,6 @@
 <li>创建一个新的自定义热键</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">videojs(&apos;vidId&apos;).ready(function() &#123;</div><div class="line">  this.hotkeys(&#123;</div><div class="line">    volumeStep: 0.1,</div><div class="line">    customKeys: &#123;</div><div class="line">      // Create custom hotkeys</div><div class="line">      ctrldKey: &#123;</div><div class="line">        key: function(event) &#123;</div><div class="line">          // Toggle something with CTRL + D Key</div><div class="line">          return (event.ctrlKey &amp;&amp; event.which === 68);</div><div class="line">        &#125;,</div><div class="line">        handler: function(player, options, event) &#123;</div><div class="line">          // Using mute as an example</div><div class="line">          if (options.enableMute) &#123;</div><div class="line">            player.muted(!player.muted());</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">//ctrl+D静音</div></pre></td></tr></table></figure>
-
       
     </div>
 
